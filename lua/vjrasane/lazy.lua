@@ -163,6 +163,7 @@ require('lazy').setup({
     },
     build = ':TSUpdate',
   },
+  'romgrk/nvim-treesitter-context',
   'nvim-treesitter/playground',
   'theprimeagen/harpoon',
   'mbbill/undotree',
