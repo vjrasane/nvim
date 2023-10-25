@@ -1,32 +1,16 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-vim.opt.clipboard = 'unnamedplus'
-
-if vim.fn.has("wsl") == 1 then
-  vim.g.clipboard = {
-      name = "WslClipboard",
-      copy = {
-          ["+"] = 'clip.exe',
-          ["*"] = 'clip.exe',
-      },
-      paste = {
-          ["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-          ["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-      },
-      cache_enabled = false
-  }
-end
-
+require("vjrasane.clipboard")
 require("vjrasane.lazy")
 require("vjrasane.options")
-require("vjrasane.remap")
 require("vjrasane.telescope")
 require("vjrasane.treesitter")
 require("vjrasane.lsp")
 require("vjrasane.harpoon")
 require("vjrasane.undotree")
 require("vjrasane.fugitive")
+require("vjrasane.remap")
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`

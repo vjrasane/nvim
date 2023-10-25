@@ -4,9 +4,34 @@
 -- NOTE: You can change these options as you wish!
 vim.o.rnu = true
 vim.o.nu = true
+
+vim.g.netrw_bufsettings = 'noma nomod rnu nu nowrap ro nobl'
+
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.smartindent = true
+
+vim.opt.wrap = false
+
+-- vim.opt.swapfile = false
+-- vim.opt.backup = false
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.undofile = true
+
+vim.opt.hlsearch = false
+vim.opt.incsearch = true
+
 -- Set highlight on search
 vim.o.hlsearch = false
 
+vim.opt.scrolloff = 8
+vim.opt.signcolumn = "yes"
+vim.opt.isfname:append("@-@")
+
+vim.opt.updatetime = 50
+
+vim.opt.colorcolumn = "80"
 -- Make line numbers default
 vim.wo.number = true
 
@@ -40,3 +65,5 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
+
+

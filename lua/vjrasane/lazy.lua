@@ -167,6 +167,12 @@ require('lazy').setup({
   'nvim-treesitter/playground',
   'theprimeagen/harpoon',
   'mbbill/undotree',
+  {'dcampos/cmp-emmet-vim',
+    dependencies = {
+      'mattn/emmet-vim'
+    }
+  },
+  'windwp/nvim-ts-autotag',
   -- require 'kickstart.plugins.autoformat',
   -- require 'kickstart.plugins.debug',
 

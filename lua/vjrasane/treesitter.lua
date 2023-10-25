@@ -64,9 +64,12 @@ vim.defer_fn(function()
         },
       },
     },
+    autotag = {
+      enabled = true,
+    }
   }
 end, 0)
-
+require('nvim-ts-autotag').setup()
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
