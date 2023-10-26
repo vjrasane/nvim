@@ -1,9 +1,9 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+require("vjrasane.options")
 require("vjrasane.clipboard")
 require("vjrasane.lazy")
-require("vjrasane.options")
 require("vjrasane.telescope")
 require("vjrasane.treesitter")
 require("vjrasane.lsp")
@@ -32,6 +32,7 @@ require('which-key').register {
   ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
   ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
   ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+  ['cs'] = { name = '[C]hange [S]urround', _ = 'which_key_ignore' },
 }
 
 -- The line beneath this is called `modeline`. See `:help modeline`

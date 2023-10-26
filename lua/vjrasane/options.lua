@@ -66,4 +66,10 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
-
+vim.g.EasyClipUseSubstituteDefaults = true
+vim.g.EasyClipPreserveCursorPositionAfterYank = true
+vim.g.EasyClipAlwaysMoveCursorToEndOfPaste = true
+vim.g.EasyClipAutoFormat = true
+-- vim.g.EasyClipShareYanks = true
+-- vim.g.EasyClipShareYanksFile = "easyclip"
+-- vim.g.EasyClipShareYanksDirectory = os.getenv("HOME") .. "/.vim"

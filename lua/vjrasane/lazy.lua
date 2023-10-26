@@ -173,9 +173,12 @@ require('lazy').setup({
     }
   },
   'windwp/nvim-ts-autotag',
-  -- require 'kickstart.plugins.autoformat',
-  -- require 'kickstart.plugins.debug',
-
+  { 'windwp/nvim-autopairs', event = "InsertEnter", opts = {}, },
+  'tpope/vim-surround',
+  'tpope/vim-repeat',
+  'tpope/vim-speeddating',
+  'svermeulen/vim-easyclip',
+  require 'vjrasane/autoformat',
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
   --    up-to-date with whatever is in the kickstart repo.
