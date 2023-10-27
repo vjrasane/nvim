@@ -47,8 +47,8 @@ vim.keymap.set("n", "<leader>f", function()
 end)
 
 
-vim.keymap.set("n", "<C-k>", "5k")
-vim.keymap.set("n", "<C-j>", "5j")
+vim.keymap.set({ "n", "v" }, "<C-k>", "5k")
+vim.keymap.set({ "n", "v" }, "<C-j>", "5j")
 -- vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 -- vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
@@ -60,7 +60,21 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/theprimeagen/packer.lua<CR>");
 vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
 
-vim.keymap.set("n", "<leader><leader>", function()
-  vim.cmd("so")
-end)
+-- vim.keymap.set("n", "<leader><leader>", function()
+--   vim.cmd("so")
+-- end)
 
+-- Diagnostic keymaps
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+
+-- vim.keymap.set('n', '[T', function() require("jump-tag").jumpParent() end, { desc = 'Jump to parent [T]ag' })
+-- vim.keymap.set('n', ']T', function() require("jump-tag").jumpChild() end, { desc = 'Jump to child [T]ag' })
+-- vim.keymap.set('n', ']t', function() require("jump-tag").jumpNextSibling() end, { desc = 'Jump to next sibling [T]ag' })
+-- vim.keymap.set('n', '[t', function() require("jump-tag").jumpPrevSibling() end,
+--   { desc = 'Jump to previous sibling [T]ag' })
+--
+--
+vim.keymap.set("n", "<leader>/1", "<cmd>:Lazy<cr>")

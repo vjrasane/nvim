@@ -1,4 +1,3 @@
-
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
@@ -66,7 +65,7 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
-vim.g.EasyClipUseSubstituteDefaults = true
+vim.g.EasyClipUseSubstituteDefaults = false
 vim.g.EasyClipPreserveCursorPositionAfterYank = true
 vim.g.EasyClipAlwaysMoveCursorToEndOfPaste = true
 vim.g.EasyClipAutoFormat = true

@@ -1,4 +1,3 @@
-
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
@@ -147,3 +146,15 @@ cmp.setup {
     { name = 'emmet_vim' },
   },
 }
+
+-- vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
+--   vim.lsp.diagnostic.on_publish_diagnostics,
+--   {
+--     underline = true,
+--     virtual_text = {
+--       spacing = 5,
+--       severity_limit = 'Warning',
+--     },
+--     update_in_insert = true,
+--   }
+-- )

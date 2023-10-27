@@ -3,9 +3,7 @@ vim.g.maplocalleader = ' '
 
 require("vjrasane.options")
 require("vjrasane.clipboard")
-require("vjrasane.lazy")
-require("vjrasane.telescope")
-require("vjrasane.treesitter")
+require("config.lazy")
 require("vjrasane.lsp")
 require("vjrasane.harpoon")
 require("vjrasane.undotree")
@@ -24,16 +22,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- document existing key chains
-require('which-key').register {
-  ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-  ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-  ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
-  ['<leader>h'] = { name = 'More git', _ = 'which_key_ignore' },
-  ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-  ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-  ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-  ['cs'] = { name = '[C]hange [S]urround', _ = 'which_key_ignore' },
-}
 
+
+-- require("Comment").setup()
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
