@@ -1,5 +1,12 @@
+local find_files_in = function(cwd)
+  require("telescope.builtin").find_files({ cwd = cwd })
+end
+local file_browser_in = function(cwd)
+  require("telescope").extensions.file_browser.file_browser({ cwd = cwd, path = "path=%:p:h=%:p:h<cr>" })
+end
 return {
   "nvimdev/dashboard-nvim",
+
   event = "VimEnter",
   config = function()
     require("dashboard").setup({
@@ -7,6 +14,13 @@ return {
       config = {
         week_header = {
           enable = true,
+        },
+        project = {
+          enable = true,
+          limit = 5,
+          action = function(cwd)
+            file_browser_in(cwd)
+          end,
         },
         shortcut = {
           { desc = "󰊳 Update", group = "@property", action = "Lazy update", key = "u" },
@@ -19,15 +33,28 @@ return {
             key = "f",
           },
           {
-            desc = " Apps",
-            group = "DiagnosticHint",
-            action = "Telescope app",
-            key = "a",
+            desc = " Home",
+            group = "directories",
+            action = function()
+              find_files_in("~/")
+            end,
+            key = "h",
+          },
+          {
+            icon = "\u{e702} ",
+            desc = "Repos",
+            group = "Number",
+            action = function()
+              file_browser_in("~/repositories")
+            end,
+            key = "r",
           },
           {
             desc = " dotfiles",
             group = "Number",
-            action = "Telescope dotfiles",
+            action = function()
+              find_files_in("~/.config/nvim")
+            end,
             key = "d",
           },
         },
@@ -36,5 +63,6 @@ return {
   end,
   dependencies = {
     { "nvim-tree/nvim-web-devicons" },
+    { "folke/which-key.nvim" },
   },
 }
