@@ -1,9 +1,3 @@
-local find_files_in = function(cwd)
-  require("telescope.builtin").find_files({ cwd = cwd })
-end
-local file_browser_in = function(cwd)
-  require("telescope").extensions.file_browser.file_browser({ cwd = cwd, path = "path=%:p:h=%:p:h<cr>" })
-end
 return {
   "nvimdev/dashboard-nvim",
 
@@ -19,48 +13,54 @@ return {
           enable = true,
           limit = 5,
           action = function(cwd)
-            find_files_in(cwd)
+            require("utils.telescope").find_files_in(cwd)
           end,
         },
+        footer = { "", "[ @vjrasane ]" },
         shortcut = {
-          { desc = "󰊳 Update", group = "@property", action = "Lazy update", key = "u" },
+          { icon = "\u{eb29} ", desc = "Packages", group = "DashboardShortCutIcon", key = "l", action = "Lazy" },
           {
-            icon = " ",
-            icon_hl = "@variable",
+            icon = "\u{ea7b} ",
             desc = "Files",
-            group = "Label",
-            action = "Telescope find_files",
+            group = "DashboardShortCutIcon",
+            action = function()
+              require("telescope.builtin").find_files()
+            end,
             key = "f",
           },
           {
             desc = " Home",
-            group = "directories",
+            group = "DashboardShortCutIcon",
             action = function()
-              find_files_in("~/")
+              require("utils.telescope").file_browser_in("~/")
             end,
             key = "h",
           },
           {
             icon = "\u{e702} ",
             desc = "Repos",
-            group = "Number",
+            group = "DashboardShortCutIcon",
             action = function()
-              file_browser_in("~/repositories")
+              require("utils.telescope").file_browser_in("~/repositories")
             end,
             key = "r",
           },
           {
-            desc = " dotfiles",
-            group = "Number",
+            icon = "\u{eb51} ",
+            desc = "Config",
+            group = "DashboardShortCutIcon",
             action = function()
-              find_files_in("~/.config/nvim")
+              require("utils.telescope").find_files_in("~/.config/nvim")
             end,
-            key = "d",
+            key = "c",
           },
         },
       },
     })
   end,
+  keys = {
+    { "<leader>d", ":Dashboard<cr>", silent = true, desc = "Dashboard" },
+  },
   dependencies = {
     { "nvim-tree/nvim-web-devicons" },
     { "folke/which-key.nvim" },
