@@ -19,7 +19,7 @@ return {
           enable = true,
           limit = 5,
           action = function(cwd)
-            file_browser_in(cwd)
+            find_files_in(cwd)
           end,
         },
         shortcut = {
