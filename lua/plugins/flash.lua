@@ -1,5 +1,6 @@
 return {
   "folke/flash.nvim",
+  event = "VeryLazy",
   dependencies = {
     { "folke/which-key.nvim" },
   },

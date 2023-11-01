@@ -1,5 +1,6 @@
 return {
   "nvim-neotest/neotest",
+  event = "VeryLazy",
   config = function()
     require("neotest").setup({
       adapters = {
