@@ -1,17 +1,17 @@
 return {
   {
     "navarasu/onedark.nvim",
-    lazy = true,
+    lazy = false,
   },
   {
     "Mofiqul/dracula.nvim",
-    lazy = false,
+    lazy = true,
   },
   {
     "LazyVim/LazyVim",
     opts = {
       -- colorscheme = "onedark",
-      colorscheme = "dracula",
+      colorscheme = "onedark",
     },
   },
 }

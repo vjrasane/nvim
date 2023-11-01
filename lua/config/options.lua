@@ -7,4 +7,7 @@ vim.opt.winbar = "%=%m %f"
 vim.opt.autochdir = true
 vim.opt.conceallevel = 0
 vim.o.laststatus = 2
+
 vim.g.lualine_laststatus = 2
+
+require("config.clipboard")
