@@ -5,6 +5,6 @@ return {
   },
   {
     "tpope/vim-surround",
-    event = "VeryLazy",
+    event = "BufReadPre",
   },
 }

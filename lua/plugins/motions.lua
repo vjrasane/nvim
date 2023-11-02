@@ -1,7 +1,7 @@
 return {
   {
     "folke/flash.nvim",
-    event = "VeryLazy",
+    event = "BufReadPre",
     dependencies = {
       { "folke/which-key.nvim" },
     },
@@ -51,7 +51,8 @@ return {
   },
   {
     "smoka7/hop.nvim",
-    event = "VeryLazy",
+    event = "BufReadPre",
+    enabled = false,
     opts = {},
     keys = {
       {

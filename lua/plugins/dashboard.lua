@@ -20,13 +20,14 @@ return {
         shortcut = {
           { icon = "\u{eb29} ", desc = "Packages", group = "DashboardShortCutIcon", key = "l", action = "Lazy" },
           {
-            icon = "\u{ea7b} ",
-            desc = "Files",
+            icon = "\u{f12e2} ",
+            desc = "Previous",
             group = "DashboardShortCutIcon",
             action = function()
-              require("telescope.builtin").find_files()
+              -- require("telescope.builtin").find_files()
+              require("persistence").load({ last = true })
             end,
-            key = "f",
+            key = "p",
           },
           {
             desc = " Home",
