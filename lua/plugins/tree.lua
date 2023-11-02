@@ -10,6 +10,7 @@ return {
   },
   {
     "nvim-neo-tree/neo-tree.nvim",
+    event = "VeryLazy",
     opts = {
       filesystem = {
         filtered_items = {
