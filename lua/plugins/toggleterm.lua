@@ -1,12 +1,12 @@
 return {
   {
     "akinsho/toggleterm.nvim",
-    event = "VeryLazy",
+    -- event = "VeryLazy",
     opts = {
       on_open = function()
         vim.cmd.startinsert()
       end,
-      direction = "vertical",
+      direction = "float",
       size = function(term)
         if term.direction == "horizontal" then
           return 15
