@@ -7,6 +7,9 @@ return {
         vim.cmd.startinsert()
       end,
       direction = "float",
+      float_opts = {
+        -- border = "double",
+      },
       size = function(term)
         if term.direction == "horizontal" then
           return 15
