@@ -1,6 +1,5 @@
 vim.opt.clipboard = "unnamedplus"
 if vim.fn.has("wsl") == 1 then
-  print("WSL")
   vim.g.clipboard = {
     name = "WslClipboard",
     copy = {

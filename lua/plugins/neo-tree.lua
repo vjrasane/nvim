@@ -3,6 +3,12 @@ return {
   "nvim-neo-tree/neo-tree.nvim",
   branch = "v3.x",
   cmd = "Neotree",
+  dependencies = {
+"MunifTanjim/nui.nvim",
+"nvim-lua/plenary.nvim",
+"nvim-tree/nvim-web-devicons",
+"LazyVim/LazyVim"
+},
   keys = {
     {
       "<leader>fe",
@@ -90,10 +96,5 @@ return {
       end,
     })
   end,
-  dependencies = {
-"MunifTanjim/nui.nvim",
-"nvim-lua/plenary.nvim",
-"LazyVim/LazyVim"
-}
 }
 }

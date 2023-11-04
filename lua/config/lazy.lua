@@ -8,15 +8,16 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 require("lazy").setup({
   spec = {
-    -- import/override with your plugins
-    { import = "plugins" },
+{ import = "plugins" },
+{ import = "plugins.lsp" },
   },
   defaults = {
     lazy = true,
     version = "*",
   },
---  install = { colorscheme = {"onedark" } },
-  checker = { enabled = true }, -- automatically check for plugin updates
+install = { colorscheme = {"nightfly" } },
+  checker = { enabled = true, notify = true }, -- automatically check for plugin updates
+  change_detection = { notify = true },
   performance = {
     rtp = {
       -- disable some rtp plugins
