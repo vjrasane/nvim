@@ -1,6 +1,7 @@
 return {
   {
     "s1n7ax/nvim-window-picker",
+				    enabled = false,
     config = function()
       require("window-picker").setup({
         hint = "floating-big-letter",
@@ -32,7 +33,7 @@ return {
         { desc = "Pick a window" },
       },
       {
-	"<leader>wx",
+        "<leader>wx",
         function()
           local picker = require("window-picker")
           local window = picker.pick_window({

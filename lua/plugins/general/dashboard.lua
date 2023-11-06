@@ -1,9 +1,7 @@
 return {
   "nvimdev/dashboard-nvim",
-lazy = false,
-	enabled = false,
 	priority = 100,
-  -- event = "VimEnter",
+	 event = "VimEnter",
 	opts = function ()
 	-- close Lazy and re-open when the dashboard is ready
     if vim.o.filetype == "lazy" then

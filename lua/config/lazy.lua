@@ -8,6 +8,8 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 require("lazy").setup({
 	{ import =	"plugins.general" },
+	{ import =	"plugins.lsp" },
+	{ import =	"plugins.git" },
 },{
 --  spec = {
 --		{ import= "plugins.global" },

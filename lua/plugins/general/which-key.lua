@@ -1,6 +1,8 @@
 return {
   "folke/which-key.nvim",
-  event = "VimEnter",
+--  lazy = false,
+--   event = "VimEnter",
+  event = "VeryLazy",
   opts = {
     plugins = { spelling = true },
     defaults = {

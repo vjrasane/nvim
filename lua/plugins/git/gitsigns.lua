@@ -36,3 +36,4 @@ return {
         end, { expr = true, buffer = bufnr, desc = 'Jump to previous hunk' })
       end,
     }
+}

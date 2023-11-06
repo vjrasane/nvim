@@ -1,7 +1,8 @@
 return {
   "ahmedkhalf/project.nvim",
-  -- event = { "BufReadPre", "BufNewFile" },
-	event = "VeryLazy",
+--   event = { "BufReadPre", "BufNewFile" },
+   event = "VeryLazy",
+--   event = "VimEnter",
   config = function()
     require("project_nvim").setup({
       patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", ".gitlab-ci.yml" },

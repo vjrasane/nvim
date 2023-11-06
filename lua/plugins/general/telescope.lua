@@ -9,7 +9,7 @@ return {
         build = "make",
         enabled = vim.fn.executable("make") == 1,
         config = function()
-          require("lazyvim.util").on_load("telescope.nvim", function()
+          require("utils").on_load("telescope.nvim", function()
             require("telescope").load_extension("fzf")
           end)
         end,
@@ -17,8 +17,8 @@ return {
           { "LazyVim/LazyVim" },
         },
       },
-      { 'nvim-lua/plenary.nvim' },
-      { 'nvim-tree/nvim-web-devicons' }
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-tree/nvim-web-devicons" },
     },
     keys = {
       {
@@ -26,16 +26,16 @@ return {
         "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>",
         desc = "Switch Buffer",
       },
-      { "<leader>/", require("lazyvim.util").telescope("live_grep"), desc = "Grep (root dir)" },
+      { "<leader>/", require("utils").telescope("live_grep"), desc = "Grep (root dir)" },
       { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
-      { "<leader><space>", require("lazyvim.util").telescope("files"), desc = "Find Files (root dir)" },
+      { "<leader><space>", require("utils").telescope("files"), desc = "Find Files (root dir)" },
       -- find
       { "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
-      { "<leader>fc", require("lazyvim.util").telescope.config_files(), desc = "Find Config File" },
-      { "<leader>ff", require("lazyvim.util").telescope("files"), desc = "Find Files (root dir)" },
-      { "<leader>fF", require("lazyvim.util").telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
+      { "<leader>fc", require("utils").telescope.config_files(), desc = "Find Config File" },
+      { "<leader>ff", require("utils").telescope("files"), desc = "Find Files (root dir)" },
+      { "<leader>fF", require("utils").telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
       { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
-      { "<leader>fR", require("lazyvim.util").telescope("oldfiles", { cwd = vim.loop.cwd() }), desc = "Recent (cwd)" },
+      { "<leader>fR", require("utils").telescope("oldfiles", { cwd = vim.loop.cwd() }), desc = "Recent (cwd)" },
       -- git
       { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "commits" },
       { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "status" },
@@ -47,8 +47,8 @@ return {
       { "<leader>sC", "<cmd>Telescope commands<cr>", desc = "Commands" },
       { "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Document diagnostics" },
       { "<leader>sD", "<cmd>Telescope diagnostics<cr>", desc = "Workspace diagnostics" },
-      { "<leader>sg", require("lazyvim.util").telescope("live_grep"), desc = "Grep (root dir)" },
-      { "<leader>sG", require("lazyvim.util").telescope("live_grep", { cwd = false }), desc = "Grep (cwd)" },
+      { "<leader>sg", require("utils").telescope("live_grep"), desc = "Grep (root dir)" },
+      { "<leader>sG", require("utils").telescope("live_grep", { cwd = false }), desc = "Grep (cwd)" },
       { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
       { "<leader>sH", "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" },
       { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
@@ -58,24 +58,24 @@ return {
       { "<leader>sR", "<cmd>Telescope resume<cr>", desc = "Resume" },
       {
         "<leader>sw",
-        require("lazyvim.util").telescope("grep_string", { word_match = "-w" }),
+        require("utils").telescope("grep_string", { word_match = "-w" }),
         desc = "Word (root dir)",
       },
       {
         "<leader>sW",
-        require("lazyvim.util").telescope("grep_string", { cwd = false, word_match = "-w" }),
+        require("utils").telescope("grep_string", { cwd = false, word_match = "-w" }),
         desc = "Word (cwd)",
       },
-      { "<leader>sw", require("lazyvim.util").telescope("grep_string"), mode = "v", desc = "Selection (root dir)" },
+      { "<leader>sw", require("utils").telescope("grep_string"), mode = "v", desc = "Selection (root dir)" },
       {
         "<leader>sW",
-        require("lazyvim.util").telescope("grep_string", { cwd = false }),
+        require("utils").telescope("grep_string", { cwd = false }),
         mode = "v",
         desc = "Selection (cwd)",
       },
       {
         "<leader>uC",
-        require("lazyvim.util").telescope("colorscheme", { enable_preview = true }),
+        require("utils").telescope("colorscheme", { enable_preview = true }),
         desc = "Colorscheme with preview",
       },
       {
@@ -109,17 +109,31 @@ return {
       local find_files_no_ignore = function()
         local action_state = require("telescope.actions.state")
         local line = action_state.get_current_line()
-        require("lazyvim.util").telescope("find_files", { no_ignore = true, default_text = line })()
+        require("utils").telescope("find_files", { no_ignore = true, default_text = line })()
       end
       local find_files_with_hidden = function()
         local action_state = require("telescope.actions.state")
         local line = action_state.get_current_line()
-        require("lazyvim.util").telescope("find_files", { hidden = true, default_text = line })()
+        require("utils").telescope("find_files", { hidden = true, default_text = line })()
       end
 
       return {
         pickers = {
+          git_files = {
+            theme = "dropdown",
+            hidden = true,
+          },
           find_files = {
+            theme = "dropdown",
+            hidden = true,
+          },
+          oldfiles = {
+            theme = "dropdown",
+            hidden = true,
+          },
+        },
+        extensions = {
+          file_browser = {
             theme = "dropdown",
             hidden = true,
           },
