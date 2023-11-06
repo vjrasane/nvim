@@ -9,6 +9,7 @@ return { {
     "hrsh7th/cmp-nvim-lsp",
     { "antosha417/nvim-lsp-file-operations", config = true },
  { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
+		{ "LazyVim/LazyVim" }
   },
  opts = {
     diagnostics = {
@@ -56,7 +57,7 @@ return { {
 require("lspconfig")
 
 -- setup keymaps
-    require("lazyvim.util").lsp.on_attach(function(client, buffer)
+    require("utils").lsp.on_attach(function(client, buffer)
       require("lazyvim.plugins.lsp.keymaps").on_attach(client, buffer)
     end)
 local register_capability = vim.lsp.handlers["client/registerCapability"]
@@ -80,7 +81,7 @@ local register_capability = vim.lsp.handlers["client/registerCapability"]
     local inlay_hint = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
 
     if opts.inlay_hints.enabled and inlay_hint then
-      require("lazyvim.util").lsp.on_attach(function(client, buffer)
+      require("utils").lsp.on_attach(function(client, buffer)
         if client.supports_method("textDocument/inlayHint") then
           inlay_hint(buffer, true)
         end
@@ -152,10 +153,10 @@ local register_capability = vim.lsp.handlers["client/registerCapability"]
       mlsp.setup({ ensure_installed = ensure_installed, handlers = { setup } })
     end
 
-    if require("lazyvim.util").lsp.get_config("denols") and require("lazyvim.util").lsp.get_config("tsserver") then
+    if require("utils").lsp.get_config("denols") and require("utils").lsp.get_config("tsserver") then
       local is_deno = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc")
-      require("lazyvim.util").lsp.disable("tsserver", is_deno)
-      require("lazyvim.util").lsp.disable("denols", function(root_dir)
+      require("utils").lsp.disable("tsserver", is_deno)
+      require("utils").lsp.disable("denols", function(root_dir)
         return not is_deno(root_dir)
       end)
     end
