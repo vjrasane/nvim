@@ -15,7 +15,7 @@ require("lazy").setup({
     lazy = true,
     version = "*",
   },
-  install = { colorscheme = { "nightfly" } },
+  install = { colorscheme = { "nightfly", "onedark" } },
   checker = { enabled = true, notify = true }, -- automatically check for plugin updates
   change_detection = { notify = true },
   performance = {
