@@ -131,6 +131,10 @@ return {
             theme = "dropdown",
             hidden = true,
           },
+          buffers = {
+            theme = "dropdown",
+            hidden = true,
+          },
         },
         extensions = {
           file_browser = {

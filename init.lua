@@ -4,3 +4,4 @@ require("config.options")
 require("config.lazy")
 -- must be after lazy
 require("config.keymaps")
+require("config.autocmds")

@@ -7,30 +7,15 @@ end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 require("lazy").setup({
-	{ import =	"plugins.general" },
-	{ import =	"plugins.lsp" },
-	{ import =	"plugins.git" },
-},{
---  spec = {
---		{ import= "plugins.global" },
--- { import = "plugins" },
--- { import = "plugins.lsp" },
- -- },
-colorscheme = function()
-    require("tokyonight").load()
-  end,
+  { import = "plugins.general" },
+  { import = "plugins.lsp" },
+  { import = "plugins.git" },
+}, {
   defaults = {
     lazy = true,
     version = "*",
   },
-news = {
-    -- When enabled, NEWS.md will be shown when changed.
-    -- This only contains big new features and breaking changes.
-    lazyvim = true,
-    -- Same but for Neovim's news.txt
-    neovim = false,
-  },
-install = { colorscheme = {"nightfly" } },
+  install = { colorscheme = { "nightfly" } },
   checker = { enabled = true, notify = true }, -- automatically check for plugin updates
   change_detection = { notify = true },
   performance = {

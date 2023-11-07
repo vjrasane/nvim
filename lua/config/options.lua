@@ -9,7 +9,8 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
-vim.opt.shortmess:append("I")
+-- vim.opt.shortmess:append("I")
+vim.opt.shortmess:append({ W = true, I = true, c = true, C = true })
 vim.g.autoformat = true
 vim.opt.conceallevel = 0
 -- vim.o.laststatus = 2
