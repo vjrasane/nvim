@@ -8,7 +8,8 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 require("lazy").setup({
   { import = "plugins.general" },
-  { import = "plugins.lsp" },
+  { import = "plugins.language" },
+  { import = "plugins.colors" },
   { import = "plugins.git" },
 }, {
   defaults = {
@@ -23,9 +24,9 @@ require("lazy").setup({
       -- disable some rtp plugins
       disabled_plugins = {
         "gzip",
-        -- "matchit",
+        "matchit",
         -- "matchparen",
-        -- "netrwPlugin",
+        "netrwPlugin",
         "tarPlugin",
         "tohtml",
         "tutor",

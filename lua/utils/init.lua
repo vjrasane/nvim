@@ -1,22 +1,7 @@
 local LazyUtil = require("lazy.core.util")
 
----@class lazyvim.util: LazyUtilCore
----@field ui lazyvim.util.ui
----@field lsp lazyvim.util.lsp
----@field root lazyvim.util.root
----@field telescope lazyvim.util.telescope
----@field terminal lazyvim.util.terminal
----@field toggle lazyvim.util.toggle
----@field format lazyvim.util.format
----@field plugin lazyvim.util.plugin
----@field extras lazyvim.util.extras
----@field inject lazyvim.util.inject
----@field news lazyvim.util.news
----@field json lazyvim.util.json
----@field lualine lazyvim.util.lualine
 local M = {}
 
----@type table<string, string|string[]>
 local deprecated = {
   get_clients = "lsp",
   on_attach = "lsp",
@@ -68,7 +53,6 @@ function M.on_very_lazy(fn)
   })
 end
 
----@param name string
 function M.opts(name)
   local plugin = require("lazy.core.config").plugins[name]
   if not plugin then
@@ -124,8 +108,6 @@ function M.lazy_notify()
   timer:start(500, 0, replay)
 end
 
----@param name string
----@param fn fun(name:string)
 function M.on_load(name, fn)
   local Config = require("lazy.core.config")
   if Config.plugins[name] and Config.plugins[name]._.loaded then

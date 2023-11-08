@@ -20,19 +20,19 @@ return {
     },
     keys = {
       {
-        "<C-t>",
+        "<leader>ft",
         ":ToggleTerm<cr>",
         desc = "Toggle Terminal",
         silent = true,
         mode = { "n" },
       },
-      {
-        "<C-t>",
-        "<C-\\><C-n>:ToggleTerm<cr>",
-        desc = "Toggle Terminal",
-        silent = true,
-        mode = { "t" },
-      },
+      -- {
+      --   "<C-T>",
+      --   "<C-\\><C-n>:ToggleTerm<cr>",
+      --   desc = "Toggle Terminal",
+      --   silent = true,
+      --   mode = { "t" },
+      -- },
     },
   },
 }

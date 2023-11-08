@@ -74,7 +74,7 @@ return {
   --   require("dashboard").setup()
   -- end,
   keys = {
-    { "<leader>d", ":Dashboard<cr>", silent = true, desc = "Dashboard" },
+    { "<leader>D", ":Dashboard<cr>", silent = true, desc = "Dashboard" },
   },
   dependencies = {
     { "nvim-tree/nvim-web-devicons" },

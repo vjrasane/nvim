@@ -59,24 +59,23 @@ return {
         },
       },
       sorting = defaults.sorting,
-window = {
-    completion = { -- rounded border; thin-style scrollbar
---      border = 'rounded',
- --     scrollbar = '║',
-    },
-    documentation = { -- no border; native-style scrollbar
-  --    border = 'rounded',
-   --   scrollbar = '',
-      -- other options
-    },
-  },
+      window = {
+        completion = { -- rounded border; thin-style scrollbar
+          --      border = 'rounded',
+          --     scrollbar = '║',
+        },
+        documentation = { -- no border; native-style scrollbar
+          --    border = 'rounded',
+          --   scrollbar = '',
+          -- other options
+        },
+      },
     }
   end,
-  ---@param opts cmp.ConfigSchema
   config = function(_, opts)
     for _, source in ipairs(opts.sources) do
       source.group_index = source.group_index or 1
     end
     require("cmp").setup(opts)
   end,
-} 
+}

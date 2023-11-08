@@ -10,21 +10,21 @@ return {
     },
     keys = {
       {
-        "<leader>fe",
+        "<leader>fE",
         function()
-          require("neo-tree.command").execute({ toggle = true, dir = require("utils").root() })
+          require("neo-tree.command").execute({ toggle = true, dir = require("utils").root(), reveal_force_cwd = true })
         end,
         desc = "Explorer NeoTree (root dir)",
       },
       {
-        "<leader>fE",
+        "<leader>fe",
         function()
-          require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd() })
+          require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd(), reveal_force_cwd = true })
         end,
         desc = "Explorer NeoTree (cwd)",
       },
-      { "<leader>e", "<leader>fe", desc = "Explorer NeoTree (root dir)", remap = true },
-      { "<leader>E", "<leader>fE", desc = "Explorer NeoTree (cwd)", remap = true },
+      { "<leader>e", "<leader>fe", desc = "Explorer NeoTree (cwd)", remap = true },
+      { "<leader>E", "<leader>fE", desc = "Explorer NeoTree (root dir)", remap = true },
       {
         "<leader>ge",
         function()
@@ -58,8 +58,8 @@ return {
         filtered_items = {
           visible = true,
         },
-        bind_to_cwd = false,
-        follow_current_file = { enabled = true },
+        bind_to_cwd = true,
+        follow_current_file = { enabled = true,  },
         use_libuv_file_watcher = true,
       },
       window = {
@@ -79,7 +79,7 @@ return {
     },
     config = function(_, opts)
       local function on_move(data)
-        require("utils").lsp.on_rename(data.source, data.destination)
+        require("utils.lsp").on_rename(data.source, data.destination)
       end
 
       local events = require("neo-tree.events")

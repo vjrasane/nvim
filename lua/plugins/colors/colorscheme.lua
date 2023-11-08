@@ -5,8 +5,8 @@ return {
     lazy = false,
     priority = 1000,
     enabled = false,
-    config = function ()
-    	vim.cmd([[colorscheme onedark]])
+    config = function()
+      vim.cmd([[colorscheme onedark]])
     end,
   },
   {
@@ -20,11 +20,23 @@ return {
     end,
   },
   {
-'Rigellute/rigel',
+    -- 'Rigellute/rigel',
+    -- dir = "~/repositories/rigel",
+    "vjrasane/rigel",
     lazy = false,
     priority = 1000,
-    config = function () 
+    config = function()
       vim.cmd([[colorscheme rigel]])
+    end,
+  },
+  {
+    "norcalli/nvim-colorizer.lua",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("colorizer").setup({
+        "vim";
+        "lua";
+      })
     end
-  }
+  },
 }

@@ -1,14 +1,9 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
-vim.keymap.set(
-  "n",
-  "<leader>sx",
-	function () 
+vim.keymap.set("n", "<leader>sx", function()
   require("telescope.builtin").resume()
-		end,
-  { noremap = true, silent = true, desc = "Resume" }
-)
+end, { noremap = true, silent = true, desc = "Resume" })
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { silent = true })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true })
@@ -20,9 +15,6 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
-
-
-
 
 local utils = require("utils")
 local map = utils.safe_keymap_set
@@ -88,7 +80,6 @@ map("i", ";", ";<c-g>u")
 -- save file
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
 
-
 --keywordprg
 map("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
 
@@ -97,7 +88,7 @@ map("v", "<", "<gv")
 map("v", ">", ">gv")
 
 -- lazy
-map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
+map("n", "<leader>L", "<cmd>Lazy<cr>", { desc = "Lazy" })
 
 -- new file
 map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
@@ -129,11 +120,16 @@ map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
 map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 -- lazygit
-map("n", "<leader>gg", function() utils.terminal({ "lazygit" }, { cwd = utils.root(), esc_esc = false, ctrl_hjkl = false }) end, { desc = "Lazygit (root dir)" })
-map("n", "<leader>gG", function() utils.terminal({ "lazygit" }, {esc_esc = false, ctrl_hjkl = false}) end, { desc = "Lazygit (cwd)" })
+map("n", "<leader>gg", function()
+  utils.terminal({ "lazygit" }, { cwd = utils.root(), esc_esc = false, ctrl_hjkl = false })
+end, { desc = "Lazygit (root dir)" })
+map("n", "<leader>gG", function()
+  utils.terminal({ "lazygit" }, { esc_esc = false, ctrl_hjkl = false })
+end, { desc = "Lazygit (cwd)" })
 
 -- quit
-map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
+map("n", "<leader>qq", "<cmd>q<cr>", { desc = "Quit Current Buffer" })
+map("n", "<leader>qa", "<cmd>qa<cr>", { desc = "Quit All" })
 
 -- highlights under cursor
 map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
