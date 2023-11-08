@@ -46,7 +46,6 @@ function M.format(component, text, hl_group)
   if not hl_group then
     return text
   end
-  ---@type table<string, string>
   component.hl_cache = component.hl_cache or {}
   local lualine_hl_group = component.hl_cache[hl_group]
   if not lualine_hl_group then
@@ -92,7 +91,6 @@ function M.pretty_path(opts)
   end
 end
 
----@param opts? {cwd:false, subdirectory: true, parent: true, other: true, icon?:string}
 function M.root_dir(opts)
   opts = vim.tbl_extend("force", {
     cwd = false,

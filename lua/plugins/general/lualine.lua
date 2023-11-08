@@ -29,7 +29,7 @@ return {
           lualine_b = { "branch" },
 
           lualine_c = {
-            require("utils").lualine.root_dir(),
+            require("utils.lualine").root_dir(),
             {
               "diagnostics",
               symbols = {
@@ -40,7 +40,15 @@ return {
               },
             },
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-            { require("utils").lualine.pretty_path() },
+            { require("utils.lualine").pretty_path() },
+            {
+              function()
+                return require("nvim-navic").get_location()
+              end,
+              cond = function()
+                return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
+              end,
+            },
           },
           lualine_x = {
           -- stylua: ignore
