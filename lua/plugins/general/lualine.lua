@@ -27,18 +27,9 @@ return {
         sections = {
           lualine_a = { "mode" },
           lualine_b = { "branch" },
-
           lualine_c = {
-            require("utils.lualine").root_dir(),
-            {
-              "diagnostics",
-              symbols = {
-                error = icons.diagnostics.Error,
-                warn = icons.diagnostics.Warn,
-                info = icons.diagnostics.Info,
-                hint = icons.diagnostics.Hint,
-              },
-            },
+            require("utils.lualine").root_dir({ cwd = true }),
+
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             { require("utils.lualine").pretty_path() },
             {
@@ -52,17 +43,17 @@ return {
           },
           lualine_x = {
           -- stylua: ignore
-          {
-            function() return require("noice").api.status.command.get() end,
-            cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
-            color = require("utils").ui.fg("Statement"),
-          },
-          -- stylua: ignore
-          {
-            function() return require("noice").api.status.mode.get() end,
-            cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
-            color = require("utils").ui.fg("Constant"),
-          },
+          -- {
+          --   function() return require("noice").api.status.command.get() end,
+          --   cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
+          --   color = require("utils").ui.fg("Statement"),
+          -- },
+          -- -- stylua: ignore
+          -- {
+          --   function() return require("noice").api.status.mode.get() end,
+          --   cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
+          --   color = require("utils").ui.fg("Constant"),
+          -- },
           -- stylua: ignore
           {
             function() return "  " .. require("dap").status() end,
@@ -70,9 +61,13 @@ return {
             color = require("utils").ui.fg("Debug"),
           },
             {
-              require("lazy.status").updates,
-              cond = require("lazy.status").has_updates,
-              color = require("utils").ui.fg("Special"),
+              "diagnostics",
+              symbols = {
+                error = icons.diagnostics.Error,
+                warn = icons.diagnostics.Warn,
+                info = icons.diagnostics.Info,
+                hint = icons.diagnostics.Hint,
+              },
             },
             {
               "diff",
@@ -91,6 +86,11 @@ return {
                   }
                 end
               end,
+            },
+            {
+              require("lazy.status").updates,
+              cond = require("lazy.status").has_updates,
+              color = require("utils").ui.fg("Special"),
             },
           },
           lualine_y = {

@@ -97,7 +97,7 @@ function M.root_dir(opts)
     subdirectory = true,
     parent = true,
     other = true,
-    icon = "󱉭 ",
+    icon = "󱉭",
     color = Util.ui.fg("Special"),
   }, opts or {})
 
@@ -128,6 +128,7 @@ function M.root_dir(opts)
     cond = function()
       return type(get()) == "string"
     end,
+    padding = { left = 1, right = 1 },
     color = opts.color,
   }
 end
