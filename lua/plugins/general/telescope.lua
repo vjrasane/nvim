@@ -141,6 +141,10 @@ return {
             theme = "dropdown",
             hidden = true,
           },
+          projects = {
+            theme = "dropdown",
+            hidden = true,
+          },
         },
         defaults = {
           file_ignore_patterns = {
