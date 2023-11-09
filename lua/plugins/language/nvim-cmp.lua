@@ -7,6 +7,7 @@ return {
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
     "saadparwaiz1/cmp_luasnip",
+    "onsails/lspkind.nvim"
   },
   opts = function()
     vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
@@ -45,13 +46,24 @@ return {
         { name = "buffer" },
       }),
       formatting = {
-        format = function(_, item)
-          local icons = require("lazyvim.config").icons.kinds
-          if icons[item.kind] then
-            item.kind = icons[item.kind] .. item.kind
-          end
-          return item
-        end,
+    format = require("lspkind").cmp_format({
+      mode = 'symbol', -- show only symbol annotations
+      maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+      ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+
+      -- The function below will be called before any actual modifications from lspkind
+      -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+      before = function (entry, vim_item)
+        return vim_item
+      end
+    })
+        -- format = function(_, item)
+        --   local icons = require("lazyvim.config").icons.kinds
+        --   if icons[item.kind] then
+        --     item.kind = icons[item.kind] .. item.kind
+        --   end
+        --   return item
+        -- end,
       },
       experimental = {
         ghost_text = {

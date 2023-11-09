@@ -20,13 +20,14 @@ return {
         severity_sort = true,
       },
       inlay_hints = {
-        enabled = true,
+        enabled = false,
       },
       format = {
         formatting_options = nil,
         timeout_ms = nil,
       },
       servers = {
+        tsserver = {},
         lua_ls = {
           settings = {
             Lua = {
@@ -44,9 +45,18 @@ return {
     },
 
     config = function(_, opts)
-      -- -- setup autoformat
-      -- require("utils").format.register(require("utils").lsp.formatter())
-      --
+      local autoformat_group = vim.api.nvim_create_augroup("AutoFormat", { clear = true })
+      local init_autoformat = function (client, buffer) 
+        if client.supports_method("textDocument/formatting") then
+          vim.api.nvim_clear_autocmds({ group = autoformat_group, buffer = buffer })
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            group = autoformat_group,
+            buffer = buffer,
+            callback = vim.lsp.buf.format,
+          })
+        end
+      end
+
       require("utils.lsp").on_attach(function(client, buffer)
         require("config.lsp.keymaps").on_attach(client, buffer)
       end)
@@ -66,14 +76,13 @@ return {
         vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
       end
 
-      local inlay_hint = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
-      if opts.inlay_hints.enabled and inlay_hint then
-        require("utils.lsp").on_attach(function(client, buffer)
-          if client.supports_method("textDocument/inlayHint") then
-            inlay_hint(buffer, true)
-          end
-        end)
-      end
+      -- if opts.inlay_hints.enabled and inlay_hint then
+      --   require("utils.lsp").on_attach(function(client, buffer)
+      --     if client.supports_method("textDocument/inlayHint") then
+      --       inlay_hint(buffer, true)
+      --     end
+      --   end)
+      -- end
 
       local find_icon = function(diagnostic)
         local icons = require("config.icons").diagnostics
@@ -96,9 +105,14 @@ return {
         {}
       )
 
+      local function on_attach(client, buffer) 
+        -- init_autoformat(client, buffer) 
+      end
+
       local function setup(server)
         local server_opts = vim.tbl_deep_extend("force", {
           capabilities = vim.deepcopy(capabilities),
+          on_attach = on_attach,
         }, servers[server] or {})
 
         if opts.setup[server] then

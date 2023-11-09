@@ -1,23 +1,14 @@
 local Util = require("utils")
 
----@class lazyvim.util.format
----@overload fun(opts?: {force?:boolean})
 local M = setmetatable({}, {
   __call = function(m, ...)
     return m.format(...)
   end,
 })
 
----@class LazyFormatter
----@field name string
----@field primary? boolean
----@field format fun(bufnr:number)
----@field sources fun(bufnr:number):string[]
----@field priority number
 
 M.formatters = {} ---@type LazyFormatter[]
 
----@param formatter LazyFormatter
 function M.register(formatter)
   M.formatters[#M.formatters + 1] = formatter
   table.sort(M.formatters, function(a, b)
@@ -32,8 +23,6 @@ function M.formatexpr()
   return vim.lsp.formatexpr({ timeout_ms = 3000 })
 end
 
----@param buf? number
----@return (LazyFormatter|{active:boolean,resolved:string[]})[]
 function M.resolve(buf)
   buf = buf or vim.api.nvim_get_current_buf()
   local have_primary = false
@@ -49,7 +38,6 @@ function M.resolve(buf)
   end, M.formatters)
 end
 
----@param buf? number
 function M.info(buf)
   buf = buf or vim.api.nvim_get_current_buf()
   local gaf = vim.g.autoformat == nil or vim.g.autoformat
@@ -82,7 +70,6 @@ function M.info(buf)
   )
 end
 
----@param buf? number
 function M.enabled(buf)
   buf = (buf == nil or buf == 0) and vim.api.nvim_get_current_buf() or buf
   local gaf = vim.g.autoformat
@@ -97,7 +84,6 @@ function M.enabled(buf)
   return gaf == nil or gaf
 end
 
----@param buf? boolean
 function M.toggle(buf)
   if buf then
     vim.b.autoformat = not M.enabled()
@@ -108,7 +94,6 @@ function M.toggle(buf)
   M.info()
 end
 
----@param opts? {force?:boolean, buf?:number}
 function M.format(opts)
   opts = opts or {}
   local buf = opts.buf or vim.api.nvim_get_current_buf()
