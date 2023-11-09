@@ -20,9 +20,10 @@ return {
     end,
   },
   {
-    -- 'Rigellute/rigel',
+    "Rigellute/rigel",
     -- dir = "~/repositories/rigel",
-    "vjrasane/rigel",
+    -- "vjrasane/rigel",
+    enabled = false,
     lazy = false,
     priority = 1000,
     config = function()
@@ -30,13 +31,42 @@ return {
     end,
   },
   {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    enabled = false,
+    config = function()
+      require("tokyonight").setup({
+        style = "moon",
+      })
+      vim.cmd([[colorscheme tokyonight]])
+    end,
+  },
+  {
     "norcalli/nvim-colorizer.lua",
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       require("colorizer").setup({
-        "vim";
-        "lua";
+        "vim",
+        "lua",
       })
-    end
+    end,
+  },
+  {
+    "AlexvZyl/nordic.nvim",
+    lazy = false,
+    enabled = false,
+    priority = 1000,
+    config = function()
+      require("nordic").load()
+    end,
+  },
+  {
+    "rmehri01/onenord.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd([[colorscheme onenord]])
+    end,
   },
 }
