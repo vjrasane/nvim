@@ -5,11 +5,11 @@ return {
   --   event = "VimEnter",
   config = function()
     require("project_nvim").setup({
-      detection_methods = { "lsp", "pattern" },
+      detection_methods = { "pattern" },
       patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", ".gitlab-ci.yml" },
-      silent_chdir = false,
+      silent_chdir = true,
       show_hidden = true,
-      ignore_lsp = { "tailwindcss", "jsonls" },
+      ignore_lsp = { "tailwindcss", "jsonls", "emmet_ls" },
     })
     require("telescope").load_extension("projects")
   end,
