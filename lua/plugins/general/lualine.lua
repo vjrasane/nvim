@@ -87,15 +87,15 @@ return {
                 end
               end,
             },
+          },
+          lualine_y = {
+            { "progress", separator = " ", padding = { left = 1, right = 0 } },
+            { "location", padding = { left = 0, right = 1 } },
             {
               require("lazy.status").updates,
               cond = require("lazy.status").has_updates,
               color = require("utils").ui.fg("Special"),
             },
-          },
-          lualine_y = {
-            { "progress", separator = " ", padding = { left = 1, right = 0 } },
-            { "location", padding = { left = 0, right = 1 } },
           },
           lualine_z = {
             function()
