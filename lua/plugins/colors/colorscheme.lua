@@ -68,18 +68,22 @@ return {
     lazy = false,
     priority = 1000,
     dependencies = {
-      { "tjdevries/colorbuddy.nvim" },
+      { "tjdevries/colorbuddy.nvim", dependencies = {
+        "SmiteshP/nvim-navic",
+      } },
     },
     config = function()
       require("neosolarized").setup({
         comment_italics = true,
         background_set = false,
       })
+      vim.cmd([[colorscheme neosolarized]])
     end,
   },
   {
     "catppuccin/nvim",
     lazy = false,
+    enabled = false,
     name = "catppuccin",
     priority = 1000,
     config = function()
@@ -87,6 +91,19 @@ return {
         flavour = "macchiato",
       })
       vim.cmd([[colorscheme catppuccin]])
+    end,
+  },
+  {
+    "EdenEast/nightfox.nvim",
+
+    lazy = false,
+    -- enabled = false,
+    priority = 1000,
+    config = function()
+      require("nightfox").setup({
+        options = { dim_inactive = true },
+      })
+      vim.cmd([[colorscheme terafox]])
     end,
   },
 }

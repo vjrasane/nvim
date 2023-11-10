@@ -29,7 +29,8 @@ M._keys = {
     end,
     desc = "Goto T[y]pe Definition",
   },
-  { "K", vim.lsp.buf.hover, desc = "Hover" },
+  { "K", "<cmd>Lspsaga hover_doc<cr>", desc = "Hover" },
+  -- { "K", vim.lsp.buf.hover, desc = "Hover" },
   { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
   { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
   -- { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
@@ -70,8 +71,10 @@ M._keys = {
     desc = "Navigate",
   },
   { "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" },
-  { "<leader>dn", vim.diagnostic.goto_next, desc = "Next Diagnostic" },
-  { "<leader>dp", vim.diagnostic.goto_prev, desc = "Previous Diagnostic" },
+  -- { "<leader>dn", vim.diagnostic.goto_next, desc = "Next Diagnostic" },
+  -- { "<leader>dp", vim.diagnostic.goto_prev, desc = "Previous Diagnostic" },
+  { "<leader>dn", "<cmd>Lspsaga diagnostic_jump_next<cr>", desc = "Next Diagnostic" },
+  { "<leader>dp", "<cmd>Lspsaga diagnostic_jump_prev<cr>", desc = "Previous Diagnostic" },
   { "<leader>dd", "<cmd>Telescope diagnostics<cr>", desc = "Diagnostics List" },
 }
 

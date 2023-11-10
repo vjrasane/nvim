@@ -7,6 +7,9 @@ return {
         -- border = "none",
         code_action = "\u{f0eb}",
       },
+      beacon = {
+        enable = false,
+      },
       outline = {
         close_after_jump = false,
         layout = "float",
