@@ -38,18 +38,9 @@ return {
     config = function()
       require("tokyonight").setup({
         style = "moon",
+        -- transparent = true,
       })
       vim.cmd([[colorscheme tokyonight]])
-    end,
-  },
-  {
-    "norcalli/nvim-colorizer.lua",
-    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      require("colorizer").setup({
-        "vim",
-        "lua",
-      })
     end,
   },
   {
@@ -63,10 +54,39 @@ return {
   },
   {
     "rmehri01/onenord.nvim",
+    enabled = false,
     lazy = false,
     priority = 1000,
     config = function()
       vim.cmd([[colorscheme onenord]])
+    end,
+  },
+  {
+
+    "svrana/neosolarized.nvim",
+    enabled = false,
+    lazy = false,
+    priority = 1000,
+    dependencies = {
+      { "tjdevries/colorbuddy.nvim" },
+    },
+    config = function()
+      require("neosolarized").setup({
+        comment_italics = true,
+        background_set = false,
+      })
+    end,
+  },
+  {
+    "catppuccin/nvim",
+    lazy = false,
+    name = "catppuccin",
+    priority = 1000,
+    config = function()
+      require("catppuccin").setup({
+        flavour = "macchiato",
+      })
+      vim.cmd([[colorscheme catppuccin]])
     end,
   },
 }

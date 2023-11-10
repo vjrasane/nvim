@@ -46,7 +46,7 @@ return {
 
     config = function(_, opts)
       local autoformat_group = vim.api.nvim_create_augroup("AutoFormat", { clear = true })
-      local init_autoformat = function (client, buffer) 
+      local init_autoformat = function(client, buffer)
         if client.supports_method("textDocument/formatting") then
           vim.api.nvim_clear_autocmds({ group = autoformat_group, buffer = buffer })
           vim.api.nvim_create_autocmd("BufWritePre", {
@@ -105,8 +105,8 @@ return {
         {}
       )
 
-      local function on_attach(client, buffer) 
-        -- init_autoformat(client, buffer) 
+      local function on_attach(client, buffer)
+        -- init_autoformat(client, buffer)
       end
 
       local function setup(server)

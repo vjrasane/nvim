@@ -1,42 +1,47 @@
 local M = {}
--- vim.keymap.set('n', 'gD', '<CMD>Glance definitions<CR>')
--- vim.keymap.set('n', 'gR', '<CMD>Glance references<CR>')
--- vim.keymap.set('n', 'gY', '<CMD>Glance type_definitions<CR>')
--- vim.keymap.set('n', 'gM', '<CMD>Glance implementations<CR>')
 M._keys = {
   { "<leader>cI", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
-  { "<leader>gd", "<cmd>Glance definitions<cr>", desc = "Goto Definition"},
-  { "<leader>gr", "<cmd>Glance references<cr>", desc = "Goto References"},
-  { "<leader>gI", "<cmd>Glance implementations<cr>", desc = "Goto Implementation"},
-  { "<leader>gY", "<cmd>Glance type_definitions<cr>", desc = "Goto T[y]pe Definition"},
-  -- {
-  --   "gd",
-  --   function()
-  --     require("telescope.builtin").lsp_definitions({ reuse_win = true })
-  --   end,
-  --   desc = "Goto Definition",
-  --   has = "definition",
-  -- },
-  -- { "gr", "<cmd>Telescope lsp_references<cr>", desc = "References" },
-  -- { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
-  -- {
-  --   "gI",
-  --   function()
-  --     require("telescope.builtin").lsp_implementations({ reuse_win = true })
-  --   end,
-  --   desc = "Goto Implementation",
-  -- },
-  -- {
-  --   "gY",
-  --   function()
-  --     require("telescope.builtin").lsp_type_definitions({ reuse_win = true })
-  --   end,
-  --   desc = "Goto [T]ype Definition",
-  -- },
+  {
+    "<leader>gd",
+    function()
+      require("config.goto").definitions()
+    end,
+    desc = "Goto Definition",
+  },
+  {
+    "<leader>gr",
+    function()
+      require("config.goto").references()
+    end,
+    desc = "Goto References",
+  },
+  {
+    "<leader>gI",
+    function()
+      require("config.goto").implementations()
+    end,
+    desc = "Goto Implementation",
+  },
+  {
+    "<leader>gY",
+    function()
+      require("config.goto").type_definitions()
+    end,
+    desc = "Goto T[y]pe Definition",
+  },
   { "K", vim.lsp.buf.hover, desc = "Hover" },
   { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
   { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
-  { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
+  -- { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
+  {
+    "<leader>ca",
+    function()
+      vim.api.nvim_command("Lspsaga code_action")
+    end,
+    desc = "Code Action",
+    mode = { "n", "v" },
+    has = "codeAction",
+  },
   {
     "<leader>cA",
     function()
@@ -51,6 +56,18 @@ M._keys = {
     end,
     desc = "Source Action",
     has = "codeAction",
+  },
+  {
+    "<leader>co",
+    "<cmd>Lspsaga outline<cr>",
+    desc = "Outline",
+  },
+  {
+    "<leader>cn",
+    function()
+      require("nvim-navbuddy").open()
+    end,
+    desc = "Navigate",
   },
   { "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" },
   { "<leader>dn", vim.diagnostic.goto_next, desc = "Next Diagnostic" },

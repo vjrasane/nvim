@@ -1,6 +1,7 @@
 return {
   "dnlhc/glance.nvim",
   event = "LspAttach",
+  enabled = false,
   config = function()
     require("glance").setup({
       border = {
