@@ -142,6 +142,8 @@ return {
       end
 
       require("mason-lspconfig").setup({ ensure_installed = ensure_installed, handlers = { setup } })
+
+      require("lspconfig.ui.windows").default_options.border = "single"
     end,
   },
 }
