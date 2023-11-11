@@ -32,8 +32,8 @@ return {
       -- find
       { "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
       { "<leader>fc", require("utils").telescope.config_files(), desc = "Find Config File" },
-      { "<leader>ff", require("utils").telescope("files"), desc = "Find Files (root dir)" },
-      { "<leader>fF", require("utils").telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
+      { "<leader>fF", require("utils").telescope("files"), desc = "Find Files (root dir)" },
+      { "<leader>ff", require("utils").telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
       { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
       { "<leader>fR", require("utils").telescope("oldfiles", { cwd = vim.loop.cwd() }), desc = "Recent (cwd)" },
       -- git
