@@ -10,6 +10,7 @@ return {
       silent_chdir = true,
       show_hidden = true,
       ignore_lsp = { "tailwindcss", "jsonls", "emmet_ls" },
+      exclude_dirs = { "~/.config/nvim/snippets" },
     })
     require("telescope").load_extension("projects")
   end,
