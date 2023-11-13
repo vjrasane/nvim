@@ -34,7 +34,6 @@ function M.detectors.lsp(buf)
   end, roots)
 end
 
----@param patterns string[]|string
 function M.detectors.pattern(buf, patterns)
   patterns = type(patterns) == "string" and { patterns } or patterns
   local path = M.bufpath(buf) or vim.loop.cwd()
@@ -58,8 +57,6 @@ function M.realpath(path)
   return Util.norm(path)
 end
 
----@param spec LazyRootSpec
----@return LazyRootFn
 function M.resolve(spec)
   if M.detectors[spec] then
     return M.detectors[spec]
@@ -71,18 +68,17 @@ function M.resolve(spec)
   end
 end
 
----@param opts? { buf?: number, spec?: LazyRootSpec[], all?: boolean }
 function M.detect(opts)
   opts = opts or {}
   opts.spec = opts.spec or type(vim.g.root_spec) == "table" and vim.g.root_spec or M.spec
   opts.buf = (opts.buf == nil or opts.buf == 0) and vim.api.nvim_get_current_buf() or opts.buf
 
-  local ret = {} ---@type LazyRoot[]
+  local ret = {}
   for _, spec in ipairs(opts.spec) do
     local paths = M.resolve(spec)(opts.buf)
     paths = paths or {}
     paths = type(paths) == "table" and paths or { paths }
-    local roots = {} ---@type string[]
+    local roots = {}
     for _, p in ipairs(paths) do
       local pp = M.realpath(p)
       if pp and not vim.tbl_contains(roots, pp) then

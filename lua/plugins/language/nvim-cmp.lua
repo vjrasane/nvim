@@ -6,7 +6,9 @@ return {
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
-    "saadparwaiz1/cmp_luasnip",
+    { "saadparwaiz1/cmp_luasnip", dependencies = {
+      "L3MON4D3/LuaSnip",
+    } },
     -- "onsails/lspkind.nvim",
   },
   opts = function()
@@ -43,7 +45,7 @@ return {
         { name = "nvim_lsp" },
         { name = "luasnip" },
         { name = "path" },
-        { name = "buffer" },
+        { name = "buffer", keyword_length = 5 },
       }),
       formatting = {
         -- format = require("lspkind").cmp_format({

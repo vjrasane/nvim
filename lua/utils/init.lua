@@ -34,6 +34,9 @@ setmetatable(M, {
   end,
 })
 
+function M.is_wsl()
+  return vim.fn.has("wsl")
+end
 function M.is_win()
   return vim.loop.os_uname().sysname:find("Windows") ~= nil
 end

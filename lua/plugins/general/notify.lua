@@ -43,6 +43,7 @@ return {
               { find = "; after #%d+" },
               { find = "; before #%d+" },
               { find = "%d fewer lines" },
+              { find = "%d more lines" },
             },
           },
           view = "mini",
