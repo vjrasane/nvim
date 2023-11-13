@@ -1,7 +1,12 @@
 {
-  "statelessFunctionComponent": {
+  "Stateless Function Component": {
     "prefix": "sfc",
-    "body": "import React, { FunctionComponent } from 'react';\n\n  const $1 : FunctionComponent<{ $2 }> = ({ $3 }) => { $4; \n\treturn (\n\t\t<div>\n\t\t\t$0\n\t\t</div>\n\t)\n}",
+    "body": "const ${1:Component}: FunctionComponent<{ $2 }> = ({ $3 }) => {\n\t$4;\n\treturn (\n\t\t<div>\n\t\t\t$0\n\t\t</div>\n\t)\n}",
     "description": "Creates a stateless React function component"
+  },
+  "Stateless Function Component Module": {
+    "prefix": "sfcm",
+    "body": "import React, { FunctionComponent } from 'react';\n\nconst ${1:Component}: FunctionComponent<{ $2 }> = ({ $3 }) => {\n\t$4;\n\treturn (\n\t\t<div>\n\t\t\t$0\n\t\t</div>\n\t)\n}\n\nexport default $1;",
+    "description": "Creates a stateless React function component module"
   }
 }
