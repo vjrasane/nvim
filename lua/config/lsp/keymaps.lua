@@ -73,8 +73,34 @@ M._keys = {
   { "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" },
   -- { "<leader>dn", vim.diagnostic.goto_next, desc = "Next Diagnostic" },
   -- { "<leader>dp", vim.diagnostic.goto_prev, desc = "Previous Diagnostic" },
-  { "<leader>dn", "<cmd>Lspsaga diagnostic_jump_next<cr>", desc = "Next Diagnostic" },
-  { "<leader>dp", "<cmd>Lspsaga diagnostic_jump_prev<cr>", desc = "Previous Diagnostic" },
+  {
+    "<leader>dn",
+    function()
+      require("config.diagnostic").goto_next(vim.diagnostic.severity.ERROR)
+    end,
+    desc = "Next Diagnostic",
+  },
+  {
+    "<leader>dp",
+    function()
+      require("config.diagnostic").goto_prev(vim.diagnostic.severity.ERROR)
+    end,
+    desc = "Previous Diagnostic",
+  },
+  {
+    "<leader>dN",
+    function()
+      require("config.diagnostic").goto_next()
+    end,
+    desc = "Next Diagnostic",
+  },
+  {
+    "<leader>dP",
+    function()
+      require("config.diagnostic").goto_prev()
+    end,
+    desc = "Previous Diagnostic",
+  },
   { "<leader>dd", "<cmd>Telescope diagnostics<cr>", desc = "Diagnostics List" },
 }
 

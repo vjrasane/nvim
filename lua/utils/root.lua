@@ -68,6 +68,7 @@ function M.resolve(spec)
   end
 end
 
+---@param opts? { buf?: number, spec?: LazyRootSpec[], all?: boolean }
 function M.detect(opts)
   opts = opts or {}
   opts.spec = opts.spec or type(vim.g.root_spec) == "table" and vim.g.root_spec or M.spec

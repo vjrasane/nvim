@@ -10,9 +10,8 @@ return {
       { "nvim-tree/nvim-web-devicons" },
     },
     opts = function()
-      -- PERF: we don't need this lualine require madness 🤷
-      local lualine_require = require("lualine_require")
-      lualine_require.require = require
+      -- local lualine_require = require("lualine_require")
+      -- lualine_require.require = require
 
       local icons = require("config.icons")
 
@@ -28,7 +27,7 @@ return {
           lualine_a = { "mode" },
           lualine_b = { "branch" },
           lualine_c = {
-            require("utils.lualine").root_dir({ cwd = true }),
+            require("utils.lualine").root_dir(),
 
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             { require("utils.lualine").pretty_path() },
