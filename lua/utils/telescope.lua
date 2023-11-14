@@ -1,17 +1,11 @@
-local Util = require("utils")
-
-local M = setmetatable({}, {
-  __call = function(m, ...)
-    return m.telescope(...)
-  end,
-})
-
+local path = require("utils.path")
+local M = {}
 function M.telescope(builtin, opts)
   local params = { builtin = builtin, opts = opts }
   return function()
     builtin = params.builtin
     opts = params.opts
-    opts = vim.tbl_deep_extend("force", { cwd = Util.root() }, opts or {}) --[[@as lazyvim.util.telescope.opts]]
+    opts = vim.tbl_deep_extend("force", { cwd = path.root() }, opts or {})
     if builtin == "files" then
       if vim.loop.fs_stat((opts.cwd or vim.loop.cwd()) .. "/.git") then
         opts.show_untracked = true
@@ -21,7 +15,6 @@ function M.telescope(builtin, opts)
       end
     end
     if opts.cwd and opts.cwd ~= vim.loop.cwd() then
-      ---@diagnostic disable-next-line: inject-field
       opts.attach_mappings = function(_, map)
         map("i", "<a-c>", function()
           local action_state = require("telescope.actions.state")
@@ -40,8 +33,24 @@ function M.telescope(builtin, opts)
 end
 
 function M.config_files()
-  return Util.telescope("find_files", { cwd = vim.fn.stdpath("config") })
+  return M.telescope("find_files", { cwd = vim.fn.stdpath("config") })
 end
+
+M.kind_filter = {
+  "Class",
+  "Constructor",
+  "Enum",
+  "Field",
+  "Function",
+  "Interface",
+  "Method",
+  "Module",
+  "Namespace",
+  "Package",
+  "Property",
+  "Struct",
+  "Trait",
+}
 
 M.find_files_in = function(cwd)
   require("telescope.builtin").find_files({

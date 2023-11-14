@@ -1,5 +1,5 @@
 local lz = require("lazy.core.util")
-
+local root = require("utils.root")
 local M = {}
 
 function M.cwd()
@@ -12,6 +12,10 @@ function M.realpath(path)
   end
   path = vim.loop.fs_realpath(path) or path
   return lz.norm(path)
+end
+
+function M.root(opts)
+  return root.get(opts)
 end
 
 return M

@@ -12,3 +12,5 @@ require("config.lazy")
 -- must be after lazy
 require("config.keymaps")
 require("config.autocmds")
+
+require("utils.root").setup()

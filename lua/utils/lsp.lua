@@ -7,7 +7,6 @@ function M.get_clients(opts)
   if vim.lsp.get_clients then
     ret = vim.lsp.get_clients(opts)
   else
-    ---@diagnostic disable-next-line: deprecated
     ret = vim.lsp.get_active_clients(opts)
     if opts and opts.method then
       ret = vim.tbl_filter(function(client)
