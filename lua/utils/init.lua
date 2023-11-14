@@ -62,52 +62,6 @@ function M.opts(name)
   return Plugin.values(plugin, "opts", false)
 end
 
-function M.deprecate(old, new)
-  M.warn(("`%s` is deprecated. Please use `%s` instead"):format(old, new), {
-    title = "LazyVim",
-    once = true,
-    stacktrace = true,
-    stacklevel = 6,
-  })
-end
-
--- delay notifications till vim.notify was replaced or after 500ms
-function M.lazy_notify()
-  local notifs = {}
-  local function temp(...)
-    table.insert(notifs, vim.F.pack_len(...))
-  end
-
-  local orig = vim.notify
-  vim.notify = temp
-
-  local timer = vim.loop.new_timer()
-  local check = assert(vim.loop.new_check())
-
-  local replay = function()
-    timer:stop()
-    check:stop()
-    if vim.notify == temp then
-      vim.notify = orig -- put back the original notify if needed
-    end
-    vim.schedule(function()
-      ---@diagnostic disable-next-line: no-unknown
-      for _, notif in ipairs(notifs) do
-        vim.notify(vim.F.unpack_len(notif))
-      end
-    end)
-  end
-
-  -- wait till vim.notify has been replaced
-  check:start(function()
-    if vim.notify ~= temp then
-      replay()
-    end
-  end)
-  -- or if it took more than 500ms, then something went wrong
-  timer:start(500, 0, replay)
-end
-
 function M.on_load(name, fn)
   local Config = require("lazy.core.config")
   if Config.plugins[name] and Config.plugins[name]._.loaded then
@@ -130,7 +84,6 @@ end
 -- It will also set `silent` to true by default.
 function M.safe_keymap_set(mode, lhs, rhs, opts)
   local keys = require("lazy.core.handler").handlers.keys
-  ---@cast keys LazyKeysHandler
   local modes = type(mode) == "string" and { mode } or mode
 
   ---@param m string

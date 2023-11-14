@@ -98,7 +98,7 @@ end
 
 function M.setup()
   vim.api.nvim_create_autocmd({ "LspAttach", "BufWritePost" }, {
-    group = vim.api.nvim_create_augroup("lazyvim_root_cache", { clear = true }),
+    group = vim.api.nvim_create_augroup("root_cache", { clear = true }),
     callback = function(event)
       M.cache[event.buf] = nil
     end,

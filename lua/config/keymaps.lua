@@ -1,6 +1,3 @@
--- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
 vim.keymap.set("n", "<leader>sx", function()
   require("telescope.builtin").resume()
 end, { noremap = true, silent = true, desc = "Resume" })
@@ -17,6 +14,7 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 local path = require("utils.path")
+local terminal = require("utils.terminal")
 local utils = require("utils")
 local map = utils.safe_keymap_set
 -- better up/down
@@ -126,10 +124,10 @@ end, { desc = "Format" })
 -- map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 -- lazygit
 map("n", "<leader>gg", function()
-  utils.terminal({ "lazygit" }, { cwd = path.root(), esc_esc = false, ctrl_hjkl = false })
+  terminal.open({ "lazygit" }, { cwd = path.root(), esc_esc = false, ctrl_hjkl = false })
 end, { desc = "Lazygit (root dir)" })
 map("n", "<leader>gG", function()
-  utils.terminal({ "lazygit" }, { esc_esc = false, ctrl_hjkl = false })
+  terminal.open({ "lazygit" }, { esc_esc = false, ctrl_hjkl = false })
 end, { desc = "Lazygit (cwd)" })
 
 -- quit

@@ -12,6 +12,11 @@ require("lazy").setup({
   { import = "plugins.colors" },
   { import = "plugins.git" },
 }, {
+  dev = {
+    -- directory where you store your local plugin projects
+    path = "~/plugins",
+    fallback = false,
+  },
   defaults = {
     lazy = true,
     version = "*",
