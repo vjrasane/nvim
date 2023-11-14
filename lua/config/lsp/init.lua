@@ -1,4 +1,3 @@
-local lz = require("lazy.core.util")
 local M = {}
 
 function M.get_clients(opts)
@@ -48,55 +47,6 @@ end
 function M.get_config(server)
   local configs = require("lspconfig.configs")
   return rawget(configs, server)
-end
-
-function M.disable(server, cond)
-  local util = require("lspconfig.util")
-  local def = M.get_config(server)
-  def.document_config.on_new_config = util.add_hook_before(def.document_config.on_new_config, function(config, root_dir)
-    if cond(root_dir, config) then
-      config.enabled = false
-    end
-  end)
-end
-
-function M.formatter(opts)
-  opts = opts or {}
-  local filter = opts.filter or {}
-  filter = type(filter) == "string" and { name = filter } or filter
-  local ret = {
-    name = "LSP",
-    primary = true,
-    priority = 1,
-    format = function(buf)
-      M.format(lz.merge(filter, { bufnr = buf }))
-    end,
-    sources = function(buf)
-      local clients = M.get_clients(lz.merge(filter, { bufnr = buf }))
-      local ret = vim.tbl_filter(function(client)
-        return client.supports_method("textDocument/formatting")
-          or client.supports_method("textDocument/rangeFormatting")
-      end, clients)
-      return vim.tbl_map(function(client)
-        return client.name
-      end, ret)
-    end,
-  }
-  return lz.merge(ret, opts)
-end
-
-function M.format(opts)
-  opts = vim.tbl_deep_extend("force", {}, opts or {}, require("lazyvim.util").opts("nvim-lspconfig").format or {})
-  local ok, conform = pcall(require, "conform")
-  -- use conform for formatting with LSP when available,
-  -- since it has better format diffing
-  if ok then
-    opts.formatters = {}
-    opts.lsp_fallback = true
-    conform.format(opts)
-  else
-    vim.lsp.buf.format(opts)
-  end
 end
 
 return M
