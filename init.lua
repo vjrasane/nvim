@@ -14,3 +14,17 @@ require("config.keymaps")
 require("config.autocmds")
 
 require("utils.root").setup()
+
+local severity = vim.diagnostic.severity
+require("config.diagnostic").setup({
+  diagnostic = {
+    priority = {
+      { severity.ERROR, severity.WARN },
+      { severity.INFO, severity.HINT },
+    },
+  },
+  on_attach = function(_, buf)
+    vim.print("FUCM")
+    require("keymaps.diagnostic").keymaps(buf)
+  end,
+})

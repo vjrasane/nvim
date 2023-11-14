@@ -1,5 +1,14 @@
 local M = {}
 
+function M.find(cond, table)
+  for _, val in pairs(table) do
+    if cond(val) then
+      return val
+    end
+  end
+  return nil
+end
+
 function M.some(cond, table)
   for _, val in pairs(table) do
     if cond(val) then
@@ -17,6 +26,12 @@ function M.filter(cond, table)
     end
   end
   return filtered
+end
+
+function M.omit(cond, table)
+  return M.filter(function(val)
+    return not cond(val)
+  end, table)
 end
 
 function M.compby(comp, table)

@@ -73,9 +73,9 @@ M._keys = {
   { "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" },
   -- { "<leader>dn", vim.diagnostic.goto_next, desc = "Next Diagnostic" },
   -- { "<leader>dp", vim.diagnostic.goto_prev, desc = "Previous Diagnostic" },
-  { "<leader>dn", require("config.diagnostic").goto_next, desc = "Next Diagnostic" },
-  { "<leader>dp", require("config.diagnostic").goto_prev, desc = "Previous Diagnostic" },
-  { "<leader>dd", "<cmd>Telescope diagnostics<cr>", desc = "Diagnostics List" },
+  -- { "<leader>dd", "<cmd>Telescope diagnostics<cr>", desc = "Diagnostics List" },
+  -- { "<leader>dn", require("config.diagnostic").goto_next, desc = "Next Diagnostic" },
+  -- { "<leader>dp", require("config.diagnostic").goto_prev, desc = "Previous Diagnostic" },
 }
 
 function M.has(buffer, method)
