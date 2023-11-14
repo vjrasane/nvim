@@ -45,6 +45,10 @@ map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
 map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
 map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 
+-- Insert Lines
+map({ "n", "i", "v" }, "<A-o>", "m`o<esc>``", { desc = "Insert line below" })
+map({ "n", "i", "v" }, "<A-O>", "m`O<esc>``", { desc = "Insert line above" })
+
 -- buffers
 map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next buffer" })
