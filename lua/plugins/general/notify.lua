@@ -48,6 +48,7 @@ return {
               { find = "%d lines yanked" },
               { find = "%d lines moved" },
               { find = "%d lines indented" },
+              { find = "%d lines" },
             },
           },
           view = "mini",

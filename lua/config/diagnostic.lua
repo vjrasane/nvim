@@ -93,9 +93,9 @@ function M.get_distance(direction, start, _end, line_count, end_col_len)
   local _, start_col = unpack(start)
   local _, end_col = unpack(_end)
   if ldist == 0 then
-    return ldist, direction * (end_col - start_col)
+    return { ldist, direction * (end_col - start_col) }
   end
-  return ldist, direction > 0 and end_col or end_col_len - end_col
+  return { ldist, direction > 0 and end_col or (end_col_len - end_col) }
 end
 
 function M.get_sev(direction)
