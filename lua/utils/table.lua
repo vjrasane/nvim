@@ -63,5 +63,16 @@ function M.len(T)
   end
   return count
 end
-
+function M.map(mapper, table)
+  local mapped = {}
+  for key, value in pairs(table) do
+    mapped[key] = mapper(value)
+  end
+  return mapped
+end
+function M.compact(table)
+  return M.omit(function(val)
+    return val == nil
+  end, table)
+end
 return M
