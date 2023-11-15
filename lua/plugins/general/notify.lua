@@ -46,6 +46,8 @@ return {
               { find = "%d fewer lines" },
               { find = "%d more lines" },
               { find = "%d lines yanked" },
+              { find = "%d lines moved" },
+              { find = "%d lines indented" },
             },
           },
           view = "mini",
