@@ -5,9 +5,7 @@ M.opts = {
   diagnostic = {
     priority = {},
   },
-  on_attach = function()
-    vim.print("OLD")
-  end,
+  on_attach = function() end,
 }
 
 local saga_provider = {

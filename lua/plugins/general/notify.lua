@@ -25,7 +25,7 @@ return {
   },
   {
     "folke/noice.nvim",
-    enabled = false,
+    -- enabled = false,
     event = "VeryLazy",
     opts = {
       lsp = {

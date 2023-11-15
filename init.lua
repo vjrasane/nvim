@@ -24,7 +24,6 @@ require("config.diagnostic").setup({
     },
   },
   on_attach = function(_, buf)
-    vim.print("FUCM")
     require("keymaps.diagnostic").keymaps(buf)
   end,
 })
