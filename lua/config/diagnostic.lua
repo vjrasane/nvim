@@ -1,4 +1,5 @@
 local T = require("utils.table")
+local B = require("utils.buffer")
 local M = {}
 
 M.opts = {
@@ -24,17 +25,16 @@ M.providers = {
 M.provider = M.providers.saga
 
 function M.goto_next(severity)
-  -- if not severity then
-  --   severity = M.get_severity(vim.diagnostic.get_next)
-  -- end
-  -- print("NEXT", severity)
+  if not severity then
+    severity = M.get_severity(1)
+  end
   M.provider.goto_next({ severity = severity })
 end
 
 function M.goto_prev(severity)
-  -- if not severity then
-  --   severity = M.get_severity(vim.diagnostic.get_prev)
-  -- end
+  if not severity then
+    severity = M.get_severity(-1)
+  end
   M.provider.goto_prev({ severity = severity })
 end
 
@@ -43,75 +43,42 @@ function f()
   local error = arg
   local unused = "ad"
 end
-function M.current_line()
-  return unpack(vim.api.nvim_win_get_cursor(0))
-end
-
-function M.get_line_count()
-  return vim.fn.line("$")
-end
-
-function M.get_line(lnum)
-  return vim.fn.getline(lnum)
-end
-
-function M.get_line_length(lnum)
-  return string.len(M.get_line(lnum))
-end
 
 function M.inrange(start, _end, value)
   return value <= _end and value >= start
 end
 
+-- function M.get_severity(direction)
+--   local priority = M.opts.diagnostic
+--   for _, group in ipairs(priority) do
+--     local diagnostic = direction({
+--       severity = group,
+--     })
+--
+--     if diagnostic then
+--       return diagnostic.severity
+--     end
+--   end
+--   return nil
+-- end
+
 function M.get_severity(direction)
-  local priority = M.opts.diagnostic
-  for _, group in ipairs(priority) do
-    local diagnostic = direction({
-      severity = group,
-    })
-
-    if diagnostic then
-      return diagnostic.severity
-    end
-  end
-  return nil
-end
-
-function M.get_line_distance(direction, start, _end, line_count)
-  local start_lnum, start_col = unpack(start)
-  local end_lnum, end_col = unpack(_end)
-  local ldiff = direction * (end_lnum - start_lnum)
-  if ldiff == 0 then
-    local cdiff = direction * (end_col - start_col)
-    return cdiff > 0 and 0 or line_count
-  end
-  return ldiff > 0 and ldiff or line_count + ldiff
-end
-
-function M.get_distance(direction, start, _end, line_count, end_col_len)
-  local ldist = M.get_line_distance(direction, start, _end, line_count)
-  local _, start_col = unpack(start)
-  local _, end_col = unpack(_end)
-  if ldist == 0 then
-    return { ldist, direction * (end_col - start_col) }
-  end
-  return { ldist, direction > 0 and end_col or (end_col_len - end_col) }
-end
-
-function M.get_sev(direction)
   local function get_diagnostic(severity)
     local accessor = direction < 0 and vim.diagnostic.get_prev or vim.diagnostic.get_next
     return accessor({ severity = severity })
   end
+  local function is_closer(current, value)
+    return B.distcomp(B.get_cursor_distance(direction, current), B.get_cursor_distance(direction, value)) < 0
+  end
   local priority = M.opts.diagnostic
+  vim.print(vim.inspect(priority))
   for _, group in ipairs(priority) do
     local ds = T.compact(T.map(get_diagnostic, group))
-    local diagnostic = direction({
-      severity = group,
-    })
+    local closest = T.compby(is_closer, ds)
 
-    if diagnostic then
-      return diagnostic.severity
+    error({ ds = ds, closest = closest, group = group })
+    if closest then
+      return closest.severity
     end
   end
   return nil
