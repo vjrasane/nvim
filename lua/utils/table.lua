@@ -1,5 +1,11 @@
 local M = {}
 
+function M.includes(value, table)
+  return M.some(function(v)
+    return v == value
+  end, table)
+end
+
 function M.find(cond, table)
   for _, val in pairs(table) do
     if cond(val) then

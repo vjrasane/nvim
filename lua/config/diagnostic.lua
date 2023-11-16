@@ -5,11 +5,15 @@ local M = {}
 M.opts = {
   diagnostic = {
     priority = {},
+    ignore_under_cursor = false,
   },
   on_attach = function() end,
 }
 
 local saga_provider = {
+  move_cursor = function(diagnostic)
+    require("lspsaga.diagnostic"):move_cursor(diagnostic)
+  end,
   goto_next = function(opts)
     require("lspsaga.diagnostic"):goto_next(opts)
   end,
@@ -24,28 +28,26 @@ M.providers = {
 
 M.provider = M.providers.saga
 
-function M.goto_next(severity)
-  if not severity then
-    severity = M.get_severity(1)
-  end
-  M.provider.goto_next({ severity = severity })
-end
-
 function M.goto_prev(severity)
-  if not severity then
-    severity = M.get_severity(-1)
+  if severity then
+    return M.provider.goto_prev({ severity = severity })
   end
-  M.provider.goto_prev({ severity = severity })
+  local diagnostic = M.get_diagnostic(-1)
+  if not diagnostic then
+    return M.provider.goto_prev()
+  end
+  M.provider.move_cursor(diagnostic)
 end
 
-function f()
-  local und = undefined
-  local error = arg
-  local unused = "ad"
-end
-
-function M.inrange(start, _end, value)
-  return value <= _end and value >= start
+function M.goto_next(severity)
+  if severity then
+    return M.provider.goto_next({ severity = severity })
+  end
+  local diagnostic = M.get_diagnostic(1)
+  if not diagnostic then
+    return M.provider.goto_next()
+  end
+  M.provider.move_cursor(diagnostic)
 end
 
 -- function M.get_severity(direction)
@@ -61,24 +63,37 @@ end
 --   end
 --   return nil
 -- end
+function M.get_diagnostics(opts)
+  return vim.diagnostic.get(0, opts)
+end
 
-function M.get_severity(direction)
-  local function get_diagnostic(severity)
-    local accessor = direction < 0 and vim.diagnostic.get_prev or vim.diagnostic.get_next
-    return accessor({ severity = severity })
-  end
-  local function is_closer(current, value)
-    return B.distcomp(B.get_cursor_distance(direction, current), B.get_cursor_distance(direction, value)) < 0
-  end
-  local priority = M.opts.diagnostic
-  vim.print(vim.inspect(priority))
+function M.is_closer(direction, closest, current)
+  local closest_pos = { closest.lnum + 1, closest.col }
+  local current_pos = { current.lnum + 1, current.col }
+  return B.distcomp(B.get_cursor_distance(direction, closest_pos), B.get_cursor_distance(direction, current_pos)) > 0
+end
+
+function M.get_closest(direction, diagnostics)
+  return T.compby(function(closest, current)
+    return M.is_closer(direction, closest, current)
+  end, diagnostics)
+end
+
+function M.get_diagnostic(direction)
+  -- local function get_diagnostic(severity)
+  --   local accessor = direction < 0 and vim.diagnostic.get_prev or vim.diagnostic.get_next
+  --   return accessor({ severity = severity })
+  -- end
+
+  local diagnostic = M.opts.diagnostic
+  local priority = diagnostic.priority
   for _, group in ipairs(priority) do
-    local ds = T.compact(T.map(get_diagnostic, group))
-    local closest = T.compby(is_closer, ds)
+    local ds = M.get_diagnostics({ severity = group })
+    local omitted = diagnostic.ignore_under_cursor and T.omit(B.is_diagnostic_under_cursor, ds) or ds
+    local closest = M.get_closest(direction, omitted)
 
-    error({ ds = ds, closest = closest, group = group })
     if closest then
-      return closest.severity
+      return closest
     end
   end
   return nil

@@ -1,7 +1,6 @@
 return {
   {
     "rcarriga/nvim-notify",
-    enabled = false,
     keys = {
       {
         "<leader>un",
@@ -26,7 +25,7 @@ return {
   },
   {
     "folke/noice.nvim",
-    enabled = false,
+    -- enabled = false,
     event = "VeryLazy",
     opts = {
       lsp = {
@@ -49,7 +48,6 @@ return {
               { find = "%d lines yanked" },
               { find = "%d lines moved" },
               { find = "%d lines indented" },
-              { find = "%d lines" },
             },
           },
           view = "mini",
