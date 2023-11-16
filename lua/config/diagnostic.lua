@@ -1,5 +1,6 @@
 local T = require("utils.table")
 local B = require("utils.buffer")
+
 local M = {}
 
 M.opts = {
@@ -50,27 +51,12 @@ function M.goto_next(severity)
   M.provider.move_cursor(diagnostic)
 end
 
--- function M.get_severity(direction)
---   local priority = M.opts.diagnostic
---   for _, group in ipairs(priority) do
---     local diagnostic = direction({
---       severity = group,
---     })
---
---     if diagnostic then
---       return diagnostic.severity
---     end
---   end
---   return nil
--- end
-function M.get_diagnostics(opts)
-  return vim.diagnostic.get(0, opts)
-end
-
 function M.is_closer(direction, closest, current)
   local closest_pos = { closest.lnum + 1, closest.col }
   local current_pos = { current.lnum + 1, current.col }
-  return B.distcomp(B.get_cursor_distance(direction, closest_pos), B.get_cursor_distance(direction, current_pos)) > 0
+  local closest_dist = B.get_cursor_distance(direction, closest_pos)
+  local current_dist = B.get_cursor_distance(direction, current_pos)
+  return B.distcomp(closest_dist, current_dist) > 0
 end
 
 function M.get_closest(direction, diagnostics)
@@ -80,15 +66,15 @@ function M.get_closest(direction, diagnostics)
 end
 
 function M.get_diagnostic(direction)
-  -- local function get_diagnostic(severity)
-  --   local accessor = direction < 0 and vim.diagnostic.get_prev or vim.diagnostic.get_next
-  --   return accessor({ severity = severity })
-  -- end
+  local function get_diagnostic(severity)
+    local accessor = direction < 0 and vim.diagnostic.get_prev or vim.diagnostic.get_next
+    return accessor({ severity = severity })
+  end
 
   local diagnostic = M.opts.diagnostic
   local priority = diagnostic.priority
   for _, group in ipairs(priority) do
-    local ds = M.get_diagnostics({ severity = group })
+    local ds = T.compact(T.map(get_diagnostic, group))
     local omitted = diagnostic.ignore_under_cursor and T.omit(B.is_diagnostic_under_cursor, ds) or ds
     local closest = M.get_closest(direction, omitted)
 
@@ -97,25 +83,6 @@ function M.get_diagnostic(direction)
     end
   end
   return nil
-end
-
-function M.get_highest_severity()
-  local row, col = M.current_line()
-
-  local function is_under_cursor(d)
-    return M.inrange(d.lnum, d.end_lnum, row - 1) and M.inrange(d.col, d.end_col, col - 1)
-  end
-
-  local function get_severity(d)
-    return d.severity
-  end
-
-  local diagnostics = T.omit(is_under_cursor, vim.diagnostic.get(0))
-  local most_severe = T.minby(get_severity, diagnostics)
-  if not most_severe then
-    return nil
-  end
-  return most_severe.severity
 end
 
 function M.setup(opts)
