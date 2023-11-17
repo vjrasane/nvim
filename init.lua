@@ -26,3 +26,5 @@ require("utils.lsp").on_attach(function(_, buf)
     },
   })
 end)
+
+require("global")

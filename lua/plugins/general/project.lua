@@ -20,7 +20,19 @@ return {
     {
       "<leader>fp",
       function()
-        require("telescope").extensions.projects.projects({})
+        require("telescope").extensions.projects.projects({
+
+          attach_mappings = function(_, map)
+            -- local open_project = function(prompt_bufnr)
+            --   local selected_entry = require("telescope.actions.state").get_selected_entry(prompt_bufnr)
+            --   require("utils.log").info(selected_entry)
+            --   require("telescope.actions").close(prompt_bufnr)
+            -- end
+            -- map("n", "<cr>", open_project)
+            -- map("i", "<cr>", open_project)
+            return true
+          end,
+        })
       end,
       desc = "Find Projects",
     },

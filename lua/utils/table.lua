@@ -1,3 +1,4 @@
+local F = require("utils.fn")
 local M = {}
 
 function M.includes(value, table)
@@ -80,5 +81,48 @@ function M.compact(table)
   return M.omit(function(val)
     return val == nil
   end, table)
+end
+function M.reduce(reducer, initial, table)
+  local acc = initial
+  for i, value in ipairs(table) do
+    acc = reducer(acc, value, i, table)
+  end
+  return acc
+end
+
+function M.flatmap(mapper, table)
+  return M.reduce(function(acc, curr)
+    local mapped = mapper(curr)
+    if type(mapped) == "table" then
+      return M.concat(mapped, acc)
+    end
+    return M.append(mapped, acc)
+  end, {}, table)
+end
+
+function M.copy(table)
+  local result = {}
+  for key, value in pairs(table) do
+    result[key] = value
+  end
+  return result
+end
+
+function M.concat(second, first)
+  local result = M.copy(first)
+  for i = 1, #second do
+    result[#result + 1] = second[i]
+  end
+  return result
+end
+
+function M.append(value, table)
+  local result = M.copy(table)
+  result[#result + 1] = value
+  return result
+end
+
+function M.flatten(table)
+  return M.flatmap(F.identity, table)
 end
 return M

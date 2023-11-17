@@ -52,6 +52,15 @@ M.kind_filter = {
   "Trait",
 }
 
+M.find_logs = function()
+  require("telescope.builtin").find_files({
+    cwd = vim.api.nvim_call_function("stdpath", { "data" }),
+    find_command = { "rg", "--files", "--glob", "*.log" },
+
+    -- rg --hidden --files | rg '.*\.log$'
+  })
+end
+
 M.find_files_in = function(cwd)
   require("telescope.builtin").find_files({
     cwd = cwd,

@@ -1,9 +1,9 @@
 return {
   "nvimdev/dashboard-nvim",
-	priority = 100,
-	 event = "VimEnter",
-	opts = function ()
-	-- close Lazy and re-open when the dashboard is ready
+  priority = 100,
+  event = "VimEnter",
+  opts = function()
+    -- close Lazy and re-open when the dashboard is ready
     if vim.o.filetype == "lazy" then
       vim.cmd.close()
       vim.api.nvim_create_autocmd("User", {
@@ -14,7 +14,7 @@ return {
       })
     end
 
-return {
+    return {
       theme = "hyper",
       config = {
         week_header = {
@@ -44,7 +44,7 @@ return {
             desc = " Home",
             group = "DashboardShortCutIcon",
             action = function()
-              require("utils.telescope").file_browser_in("~/")
+              vim.api.nvim_command("Neotree dir=~")
             end,
             key = "h",
           },
@@ -53,7 +53,8 @@ return {
             desc = "Repos",
             group = "DashboardShortCutIcon",
             action = function()
-              require("utils.telescope").file_browser_in("~/repositories")
+              -- require("utils.telescope").file_browser_in("~/repositories")
+              vim.api.nvim_command("Neotree dir=~/repositories")
             end,
             key = "r",
           },
@@ -62,14 +63,15 @@ return {
             desc = "Config",
             group = "DashboardShortCutIcon",
             action = function()
-              require("utils.telescope").find_files_in("~/.config/nvim")
+              -- require("utils.telescope").find_files_in("~/.config/nvim")
+              vim.api.nvim_command("Neotree dir=~/.config/nvim")
             end,
             key = "c",
           },
         },
       },
     }
-		end,
+  end,
   -- config = function()
   --   require("dashboard").setup()
   -- end,

@@ -186,6 +186,13 @@ return {
         end,
         desc = "Goto Symbol (Workspace)",
       },
+      {
+        "<leader>fl",
+        function()
+          require("utils.telescope").find_logs()
+        end,
+        desc = "Find Logs",
+      },
     },
   },
 }

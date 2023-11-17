@@ -51,7 +51,7 @@ M.providers = {
   saga = saga_provider,
 }
 
-M.provider = M.providers.saga
+M.provider = M.providers.telescope
 
 function M.definitions()
   M.provider.definitions()
