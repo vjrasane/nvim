@@ -125,4 +125,13 @@ end
 function M.flatten(table)
   return M.flatmap(F.identity, table)
 end
+
+function M.reverse(table)
+  local reversed = {}
+  for i, value in ipairs(table) do
+    reversed[#table - i + 1] = value
+  end
+  return reversed
+end
+
 return M

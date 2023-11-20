@@ -6,7 +6,7 @@ function M.realpath(path)
     return nil
   end
   path = vim.loop.fs_realpath(path) or path
-  return lz.norm(path)
+  return vim.fsnormalize(path)
 end
 
 function M.bufpath(buf)
