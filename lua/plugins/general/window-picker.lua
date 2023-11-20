@@ -1,17 +1,17 @@
 return {
   {
-    "vjrasane/nvim-window-picker",
-    -- "s1n7ax/nvim-window-picker",
+    -- "vjrasane/nvim-window-picker",
+    "s1n7ax/nvim-window-picker",
     -- enabled = false,
     version = false,
     config = function()
       require("window-picker").setup({
         show_prompt = false,
         hint = "floating-big-letter",
-        filter_func = function(window_ids, filters)
-          require("utils.log").info("LOGGING")
-          require("config.window-picker").filter_windows(window_ids, filters)
-        end,
+        -- filter_func = function(window_ids, filters)
+        --   require("utils.log").info("LOGGING")
+        --   require("config.window-picker").filter_windows(window_ids, filters)
+        -- end,
         filter_rules = {
           autoselect_one = true,
           include_current_win = false,
@@ -21,7 +21,7 @@ return {
             filetype = { "neo-tree", "neo-tree-popup", "notify", "quickfix", "Trouble", "fidget", "noice" },
 
             -- if the buffer type is one of following, the window will be ignored
-            buftype = { "terminal" },
+            buftype = { "terminal", "nofile" },
           },
         },
       })

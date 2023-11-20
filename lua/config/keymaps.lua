@@ -13,7 +13,7 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
-local path = require("utils.path")
+local P = require("utils.path")
 local terminal = require("utils.terminal")
 local utils = require("utils")
 -- better up/down
@@ -123,7 +123,7 @@ end, { desc = "Format" })
 -- vim.keymap.set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 -- lazygit
 vim.keymap.set("n", "<leader>gg", function()
-  terminal.open({ "lazygit" }, { cwd = path.root(), esc_esc = false, ctrl_hjkl = false })
+  terminal.open({ "lazygit" }, { cwd = P.cwd(), esc_esc = false, ctrl_hjkl = false })
 end, { desc = "Lazygit (root dir)" })
 vim.keymap.set("n", "<leader>gG", function()
   terminal.open({ "lazygit" }, { esc_esc = false, ctrl_hjkl = false })

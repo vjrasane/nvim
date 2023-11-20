@@ -13,8 +13,6 @@ require("config.lazy")
 require("config.keymaps")
 require("config.autocmds")
 
-require("utils.root").setup()
-
 local severity = vim.diagnostic.severity
 
 require("utils.lsp").on_attach(function(_, buf)

@@ -1,11 +1,12 @@
-local path = require("utils.path")
+local P = require("utils.path")
 local M = {}
+
 function M.telescope(builtin, opts)
   local params = { builtin = builtin, opts = opts }
   return function()
     builtin = params.builtin
     opts = params.opts
-    opts = vim.tbl_deep_extend("force", { cwd = path.root() }, opts or {})
+    opts = vim.tbl_deep_extend("force", { cwd = P.cwd() }, opts or {})
     if builtin == "files" then
       if vim.loop.fs_stat((opts.cwd or vim.loop.cwd()) .. "/.git") then
         opts.show_untracked = true
