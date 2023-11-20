@@ -12,7 +12,11 @@ return {
       {
         "<leader>fE",
         function()
-          require("neo-tree.command").execute({ toggle = true, dir = require("utils").root(), reveal_force_cwd = true })
+          require("neo-tree.command").execute({
+            toggle = true,
+            dir = require("config.root").get_cwd_root(),
+            reveal_force_cwd = true,
+          })
         end,
         desc = "Explorer NeoTree (root dir)",
       },
@@ -59,7 +63,7 @@ return {
           visible = true,
         },
         bind_to_cwd = true,
-        follow_current_file = { enabled = true,  },
+        follow_current_file = { enabled = true },
         use_libuv_file_watcher = true,
       },
       window = {

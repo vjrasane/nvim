@@ -60,4 +60,14 @@ function M.get_path_root(path)
   return nil
 end
 
+function M.get_buf_root(bufno)
+  local path = vim.api.nvim_buf_get_name(bufno or 0)
+  return M.get_path_root(path)
+end
+
+function M.get_cwd_root()
+  local path = vim.loop.cwd()
+  return M.get_path_root(path)
+end
+
 return M
