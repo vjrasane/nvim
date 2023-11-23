@@ -19,7 +19,6 @@ return {
     },
     opts = function()
       local actions = require("telescope.actions")
-
       local open_with_trouble = function(...)
         return require("trouble.providers.telescope").open_with_trouble(...)
       end
@@ -35,6 +34,28 @@ return {
         local action_state = require("telescope.actions.state")
         local line = action_state.get_current_line()
         require("utils.telescope").telescope("find_files", { hidden = true, default_text = line })()
+      end
+      local open_with_window_picker = function(prompt_bufnr)
+        local action_state = require("telescope.actions.state")
+        local path = require("plenary.path")
+
+        actions.close(prompt_bufnr)
+        local selected_entry = action_state.get_selected_entry()
+        local _, entry_path = next(selected_entry)
+        if not entry_path then
+          return
+        end
+        local winid = require("window-picker").pick_window({
+          filter_rules = {
+            include_current_win = true,
+          },
+        })
+        if not winid then
+          return
+        end
+        local full_path = path:new(entry_path):absolute()
+        vim.api.nvim_set_current_win(winid)
+        vim.cmd("edit " .. vim.fn.fnameescape(full_path))
       end
 
       return {
@@ -98,6 +119,7 @@ return {
               ["<C-Up>"] = actions.cycle_history_prev,
               ["<C-f>"] = actions.preview_scrolling_down,
               ["<C-b>"] = actions.preview_scrolling_up,
+              ["<C-w>"] = open_with_window_picker,
             },
             n = {
               ["q"] = actions.close,

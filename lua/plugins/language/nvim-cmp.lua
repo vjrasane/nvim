@@ -9,11 +9,13 @@ return {
     { "saadparwaiz1/cmp_luasnip", dependencies = {
       "L3MON4D3/LuaSnip",
     } },
+
     -- "onsails/lspkind.nvim",
   },
   opts = function()
     vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
     local cmp = require("cmp")
+    local luasnip = require("luasnip")
     local defaults = require("cmp.config.default")()
     return {
       completion = {
@@ -25,6 +27,24 @@ return {
         end,
       },
       mapping = cmp.mapping.preset.insert({
+        ["<Tab>"] = function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          elseif luasnip.expand_or_jumpable() then
+            vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
+          else
+            fallback()
+          end
+        end,
+        ["<S-Tab>"] = function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          elseif luasnip.jumpable(-1) then
+            vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
+          else
+            fallback()
+          end
+        end,
         ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
         ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
@@ -88,5 +108,6 @@ return {
       source.group_index = source.group_index or 1
     end
     require("cmp").setup(opts)
+    require("tabout")
   end,
 }
