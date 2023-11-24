@@ -69,6 +69,13 @@ return {
       window = {
         position = "float",
         mappings = {
+          ["<C-w>"] = "open_with_window_picker",
+          ["<C-v>"] = "open_vsplit",
+          ["<C-x>"] = "open_split",
+          ["<C-t>"] = "open_tabnew",
+          ["w"] = "none",
+          ["S"] = "none",
+          ["s"] = "none",
           ["<space>"] = "none",
         },
       },
