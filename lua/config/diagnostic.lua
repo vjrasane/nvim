@@ -49,7 +49,7 @@ function M.goto_next(severity)
   if severity then
     return M.provider.goto_next({ severity = severity })
   end
-  local diagnostic = M.get_diagnostic(1function() end)
+  local diagnostic = M.get_diagnostic(function() end)
   if not diagnostic then
     return M.provider.goto_next()
   end
