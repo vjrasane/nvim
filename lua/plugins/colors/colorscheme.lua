@@ -83,12 +83,12 @@ return {
   {
     "catppuccin/nvim",
     lazy = false,
-    enabled = false,
-    name = "catppuccin",
+    -- enabled = false,
+    name = "macchiato",
     priority = 1000,
     config = function()
       require("catppuccin").setup({
-        flavour = "macchiato",
+        flavour = "mocha",
       })
       vim.cmd([[colorscheme catppuccin]])
     end,
@@ -97,7 +97,7 @@ return {
     "EdenEast/nightfox.nvim",
 
     lazy = false,
-    -- enabled = false,
+    enabled = false,
     priority = 1000,
     config = function()
       require("nightfox").setup({

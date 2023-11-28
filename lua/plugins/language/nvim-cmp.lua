@@ -6,10 +6,12 @@ return {
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
-    { "saadparwaiz1/cmp_luasnip", dependencies = {
-      "L3MON4D3/LuaSnip",
-    } },
-
+    {
+      "saadparwaiz1/cmp_luasnip",
+      dependencies = {
+        "L3MON4D3/LuaSnip",
+      },
+    },
     -- "onsails/lspkind.nvim",
   },
   opts = function()
@@ -31,7 +33,15 @@ return {
           -- if cmp.visible() then
           --   cmp.select_next_item()
           if luasnip.expand_or_jumpable() then
-            vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
+            vim.fn.feedkeys(
+              vim.api.nvim_replace_termcodes(
+                "<Plug>luasnip-expand-or-jump",
+                true,
+                true,
+                true
+              ),
+              ""
+            )
           else
             fallback()
           end
@@ -40,13 +50,25 @@ return {
           -- if cmp.visible() then
           --   cmp.select_prev_item()
           if luasnip.jumpable(-1) then
-            vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
+            vim.fn.feedkeys(
+              vim.api.nvim_replace_termcodes(
+                "<Plug>luasnip-jump-prev",
+                true,
+                true,
+                true
+              ),
+              ""
+            )
           else
             fallback()
           end
         end,
-        ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-        ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+        ["<C-n>"] = cmp.mapping.select_next_item({
+          behavior = cmp.SelectBehavior.Insert,
+        }),
+        ["<C-p>"] = cmp.mapping.select_prev_item({
+          behavior = cmp.SelectBehavior.Insert,
+        }),
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         ["<C-Space>"] = cmp.mapping.complete(),
@@ -95,10 +117,10 @@ return {
       sorting = defaults.sorting,
       window = {
         completion = { -- rounded border; thin-style scrollbar
-          border = "rounded",
+          -- border = "rounded",
         },
         documentation = { -- no border; native-style scrollbar
-          border = "rounded",
+          -- border = "rounded",
         },
       },
     }

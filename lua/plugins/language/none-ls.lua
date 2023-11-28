@@ -1,5 +1,7 @@
 return {
+
   "nvimtools/none-ls.nvim", -- configure formatters & linters
+  enabled = false,
   -- event = { "BufReadPre", "BufNewFile" }, -- to enable uncomment this
   event = "LspAttach",
   dependencies = {
