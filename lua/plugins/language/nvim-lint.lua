@@ -17,7 +17,7 @@ return {
       },
     },
     linters_by_ft = {
-      lua = { "luacheck" },
+      -- lua = { "luacheck" },
       fish = { "fish" },
       javascript = { "eslint_d" },
       astro = { "eslint_d" },
@@ -26,7 +26,7 @@ return {
       typescriptreact = { "eslint_d" },
     },
   },
-  config = function(opts)
+  config = function(_, opts)
     require("lint").linters_by_ft = opts.linters_by_ft
     require("lint").linters.eslint_d = opts.linters.eslint_d
 
