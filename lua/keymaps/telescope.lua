@@ -36,10 +36,13 @@ return {
   { "<leader>sD", "<cmd>Telescope diagnostics<cr>", desc = "Workspace diagnostics" },
   {
     "<leader>sG",
-    require("utils.telescope").telescope("live_grep", { cwd = require("config.root").get_cwd_root }),
+    require("utils.telescope").telescope(
+      "live_grep",
+      { cwd = require("config.root").get_cwd_root }
+    ),
     desc = "Grep (root)",
   },
-  { "<leader>sg", require("utils.telescope").telescope("live_grep", { cwd = false }), desc = "Grep" },
+  { "<leader>sg", require("utils.telescope").telescope("live_grep"), desc = "Grep" },
   { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
   { "<leader>sH", "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" },
   { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
@@ -57,7 +60,12 @@ return {
     require("utils.telescope").telescope("grep_string", { cwd = false, word_match = "-w" }),
     desc = "Word (cwd)",
   },
-  { "<leader>sw", require("utils.telescope").telescope("grep_string"), mode = "v", desc = "Selection (root dir)" },
+  {
+    "<leader>sw",
+    require("utils.telescope").telescope("grep_string"),
+    mode = "v",
+    desc = "Selection (root dir)",
+  },
   {
     "<leader>sW",
     require("utils.telescope").telescope("grep_string", { cwd = false }),

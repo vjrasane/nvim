@@ -17,6 +17,8 @@ return {
         options = {
           theme = "auto",
           globalstatus = true,
+          section_separators = "",
+          component_separators = "",
           disabled_filetypes = { statusline = { "dashboard", "alpha", "starter" } },
         },
         sections = {

@@ -17,10 +17,14 @@ return {
     require("conform").setup({
       formatters_by_ft = {
         lua = { "stylua" },
-        python = { "isort", "black" },
+        python = { "isort", "black", "autopep8" },
         sh = { "shfmt" },
         javascript = { "prettierd", "prettier" },
+        javascriptreact = { "prettierd", "prettier" },
+        typescript = { "prettierd", "prettier" },
+        typescriptreact = { "prettierd", "prettier" },
         astro = { "prettierd", "prettier" },
+        markdown = { "prettierd", "prettier" },
       },
       format_on_save = {
         timeout_ms = 5000,
