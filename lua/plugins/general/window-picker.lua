@@ -18,7 +18,15 @@ return {
           -- filter using buffer options
           bo = {
             -- if the file type is one of following, the window will be ignored
-            filetype = { "neo-tree", "neo-tree-popup", "notify", "quickfix", "Trouble", "fidget", "noice" },
+            filetype = {
+              "neo-tree",
+              "neo-tree-popup",
+              "notify",
+              "quickfix",
+              "Trouble",
+              "fidget",
+              "noice",
+            },
 
             -- if the buffer type is one of following, the window will be ignored
             buftype = { "terminal", "nofile" },
@@ -28,16 +36,16 @@ return {
     end,
     keys = {
       {
-        "<leader>wp",
+        "<C-w>p",
         function()
           local picker = require("window-picker")
           local picked_window_id = picker.pick_window() or vim.api.nvim_get_current_win()
           vim.api.nvim_set_current_win(picked_window_id)
         end,
-        { desc = "Pick a window" },
+        desc = "Pick a window",
       },
       {
-        "<leader>wx",
+        "<C-w>x",
         function()
           local picker = require("window-picker")
           local window = picker.pick_window()
@@ -47,7 +55,7 @@ return {
           -- Set current window to contain target buffer
           vim.api.nvim_win_set_buf(0, target_buffer)
         end,
-        { desc = "Swap windows" },
+        desc = "Swap windows",
       },
     },
   },

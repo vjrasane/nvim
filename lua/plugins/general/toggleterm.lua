@@ -2,6 +2,7 @@ return {
   {
     "akinsho/toggleterm.nvim",
     -- event = "VeryLazy",
+    enabled = false,
     opts = {
       on_open = function()
         vim.cmd.startinsert()

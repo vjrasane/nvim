@@ -115,7 +115,9 @@ return {
           end,
           mappings = {
             i = {
-              ["<c-t>"] = open_with_trouble,
+              ["<esc>"] = actions.close,
+              ["<C-c>"] = actions.close,
+              -- ["<c-t>"] = open_with_trouble,
               ["<a-t>"] = open_selected_with_trouble,
               ["<a-i>"] = find_files_no_ignore,
               ["<a-h>"] = find_files_with_hidden,
@@ -123,11 +125,13 @@ return {
               ["<C-Up>"] = actions.cycle_history_prev,
               ["<C-f>"] = actions.preview_scrolling_down,
               ["<C-b>"] = actions.preview_scrolling_up,
-              ["<C-p>"] = open_with_window_picker,
+              ["<C-s>"] = actions.select_horizontal,
+              ["<C-v>"] = actions.select_vertical,
+              ["<C-x>"] = open_with_window_picker,
             },
-            n = {
-              ["q"] = actions.close,
-            },
+            -- n = {
+            --   ["q"] = actions.close,
+            -- },
           },
         },
       }

@@ -1,39 +1,32 @@
 return {
-  { "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
+  { "<leader>b", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
   {
-    "<leader>fF",
-    function()
-      require("telescope.builtin").find_files({ cwd = require("config.root").get_cwd_root() })
-    end,
-    desc = "Find Files (root dir)",
-  },
-  {
-    "<leader>ff",
+    "<leader>f",
     function()
       require("telescope.builtin").find_files({ cwd = require("utils.path").cwd() })
     end,
     desc = "Find Files (cwd)",
   },
-  { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
-  { "<leader>fc", require("utils.telescope").config_files(), desc = "Find Config File" },
   {
-    "<leader>fl",
+    "<leader>F",
+    function()
+      require("telescope.builtin").find_files({ cwd = require("config.root").get_cwd_root() })
+    end,
+    desc = "Find Files (root dir)",
+  },
+  { "<leader>r", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
+  { "<leader>sc", require("utils.telescope").config_files(), desc = "Find Config File" },
+  {
+    "<leader>sL",
     function()
       require("utils.telescope").find_logs()
     end,
     desc = "Find Logs",
   },
-  -- git
-  { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "commits" },
-  { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "status" },
-  --   -- search
   { '<leader>s"', "<cmd>Telescope registers<cr>", desc = "Registers" },
-  { "<leader>sa", "<cmd>Telescope autocommands<cr>", desc = "Auto Commands" },
   { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer" },
-  { "<leader>sc", "<cmd>Telescope command_history<cr>", desc = "Command History" },
-  { "<leader>sC", "<cmd>Telescope commands<cr>", desc = "Commands" },
   { "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Document diagnostics" },
-  { "<leader>sD", "<cmd>Telescope diagnostics<cr>", desc = "Workspace diagnostics" },
+  { "<leader>sg", require("utils.telescope").telescope("live_grep"), desc = "Grep" },
   {
     "<leader>sG",
     require("utils.telescope").telescope(
@@ -42,7 +35,10 @@ return {
     ),
     desc = "Grep (root)",
   },
-  { "<leader>sg", require("utils.telescope").telescope("live_grep"), desc = "Grep" },
+  { "<leader>sD", "<cmd>Telescope diagnostics<cr>", desc = "Workspace diagnostics" },
+  { "<leader>s:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
+  { "<leader>sA", "<cmd>Telescope autocommands<cr>", desc = "Auto Commands" },
+  { "<leader>sC", "<cmd>Telescope commands<cr>", desc = "Commands" },
   { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
   { "<leader>sH", "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" },
   { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
@@ -52,25 +48,31 @@ return {
   { "<leader>sR", "<cmd>Telescope resume<cr>", desc = "Resume" },
   {
     "<leader>sw",
-    require("utils.telescope").telescope("grep_string", { word_match = "-w" }),
+    require("utils.telescope").telescope(
+      "grep_string",
+      { cwd = require("config.root").get_cwd_root, word_match = "-w" }
+    ),
     desc = "Word (root dir)",
   },
   {
     "<leader>sW",
-    require("utils.telescope").telescope("grep_string", { cwd = false, word_match = "-w" }),
+    require("utils.telescope").telescope("grep_string", { word_match = "-w" }),
     desc = "Word (cwd)",
   },
   {
     "<leader>sw",
-    require("utils.telescope").telescope("grep_string"),
-    mode = "v",
-    desc = "Selection (root dir)",
-  },
-  {
-    "<leader>sW",
     require("utils.telescope").telescope("grep_string", { cwd = false }),
     mode = "v",
     desc = "Selection (cwd)",
+  },
+  {
+    "<leader>sW",
+    require("utils.telescope").telescope(
+      "grep_string",
+      { cwd = require("config.root").get_cwd_root }
+    ),
+    mode = "v",
+    desc = "Selection (root dir)",
   },
   {
     "<leader>uC",
@@ -95,4 +97,6 @@ return {
     end,
     desc = "Goto Symbol (Workspace)",
   },
+  { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "commits" },
+  { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "status" },
 }
