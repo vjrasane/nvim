@@ -1,6 +1,7 @@
+local utils = require("utils")
+
 vim.opt.clipboard = "unnamedplus"
-if vim.fn.has("wsl") == 1 then
-  print("WSL")
+if utils.is_wsl() then
   vim.g.clipboard = {
     name = "WslClipboard",
     copy = {
