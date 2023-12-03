@@ -25,6 +25,7 @@ return {
         typescriptreact = { "prettierd", "prettier" },
         astro = { "prettierd", "prettier" },
         markdown = { "prettierd", "prettier" },
+        golang = { "golines" },
       },
       format_on_save = {
         timeout_ms = 5000,
