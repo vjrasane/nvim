@@ -36,13 +36,20 @@ M._keys = {
   -- { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
   {
     "<leader>ca",
-    function()
-      vim.api.nvim_command("Lspsaga code_action")
-    end,
+    vim.lsp.buf.code_action,
     desc = "Code Action",
     mode = { "n", "v" },
     has = "codeAction",
   },
+  -- {
+  --   "<leader>ca",
+  --   function()
+  --     vim.api.nvim_command("Lspsaga code_action")
+  --   end,
+  --   desc = "Code Action",
+  --   mode = { "n", "v" },
+  --   has = "codeAction",
+  -- },
   {
     "<leader>cA",
     function()

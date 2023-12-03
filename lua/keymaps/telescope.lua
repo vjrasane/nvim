@@ -26,7 +26,11 @@ return {
   { '<leader>s"', "<cmd>Telescope registers<cr>", desc = "Registers" },
   { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer" },
   { "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Document diagnostics" },
-  { "<leader>sg", require("utils.telescope").telescope("live_grep"), desc = "Grep" },
+  {
+    "<leader>sg",
+    require("utils.telescope").telescope("live_grep", { cwd = vim.loop.cwd }),
+    desc = "Grep",
+  },
   {
     "<leader>sG",
     require("utils.telescope").telescope(
