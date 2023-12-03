@@ -23,8 +23,6 @@ return {
 
     require("mason-lspconfig").setup({
       ensure_installed = {
-        "stylua",
-        "shfmt",
         "tsserver",
         "html",
         "cssls",
