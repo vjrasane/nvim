@@ -2,32 +2,35 @@ local D = require("utils.diagnostic")
 
 local M = {}
 
-function M.keymaps(viewer, buf, opts)
+function M.keymaps(buf, opts)
   local function goto_prev(severity)
     if severity then
-      return viewer.goto_prev({ severity = severity })
+      return vim.diagnostic.goto_prev({ severity = severity })
     end
     local diagnostic = D.get_diagnostic(-1, opts)
     if not diagnostic then
-      return viewer.goto_prev()
+      return vim.diagnostic.goto_prev()
     end
-    viewer.move_cursor(diagnostic)
+    vim.diagnostic.goto_next({ severity = diagnostic.severity })
   end
-
+  local unused = "asd"
   local function goto_next(severity)
     if severity then
-      return viewer.goto_next({ severity = severity })
+      return vim.diagnostic.goto_next({ severity = severity })
     end
     local diagnostic = D.get_diagnostic(1, opts)
     if not diagnostic then
-      return viewer.goto_next()
+      return vim.diagnostic.goto_next()
     end
-    viewer.move_cursor(diagnostic)
+
+    vim.diagnostic.goto_next({ severity = diagnostic.severity })
   end
 
   vim.keymap.set("n", "<leader>dn", goto_next, { desc = "Next diagnostic", buffer = buf })
   vim.keymap.set("n", "<leader>dp", goto_prev, { desc = "Previous diagnostic", buffer = buf })
-  vim.keymap.set("n", "<leader>dd", viewer.list, { desc = "Diagnostics list" })
+  vim.keymap.set("n", "<leader>dd", function()
+    require("telescope.builtin").diagnostics()
+  end, { desc = "Diagnostics list" })
 end
 
 return M

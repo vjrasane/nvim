@@ -28,13 +28,40 @@ return {
         view = "mini",
       },
     },
+    views = {
+      cmdline_popup = {
+        border = {
+          style = "none",
+          padding = { 1, 1 },
+        },
+      },
+      filter_options = {},
+      win_options = {
+        winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
+      },
+    },
     presets = {
-      bottom_search = true,
+      bottom_search = false,
       command_palette = true,
       long_message_to_split = true,
       inc_rename = true,
+      lsp_doc_border = false,
     },
   },
+  -- config = function(_, opts)
+  --   require("noice").setup(opts)
+  --   local colors = require("catppuccin.palettes").get_palette()
+  --   if not colors then
+  --     return
+  --   end
+  --   local NoiceColor = {
+  --     NoicePopupBorder = { fg = colors.mantle, bg = colors.mantle },
+  --     NoiceCmdlinePopupBorder = { fg = colors.mantle, bg = colors.mantle },
+  --   }
+  --   for hl, col in pairs(NoiceColor) do
+  --     vim.api.nvim_set_hl(0, hl, col)
+  --   end
+  -- end,
   -- stylua: ignore
   keys = {
     { "<S-Enter>", function() require("noice").redirect(vim.fn.getcmdline()) end, mode = "c", desc = "Redirect Cmdline" },

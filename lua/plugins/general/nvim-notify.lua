@@ -6,17 +6,7 @@ return {
     },
     opts = {
       stages = "fade",
-      render = function(bufnr, notif, highlights)
-        local namespace = require("notify.render.base").namespace()
-        vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, notif.message)
-
-        vim.api.nvim_buf_set_extmark(bufnr, namespace, 0, 0, {
-          hl_group = highlights.icon,
-          end_line = #notif.message - 1,
-          end_col = #notif.message[#notif.message],
-          priority = 50,
-        })
-      end,
+      render = "compact",
       timeout = 3000,
       max_height = function()
         return math.floor(vim.o.lines * 0.75)

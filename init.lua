@@ -16,8 +16,7 @@ require("config.autocmds")
 local severity = vim.diagnostic.severity
 
 require("utils.lsp").on_attach(function(_, buf)
-  local viewer = require("config.diagnostic.lspsaga")
-  require("keymaps.diagnostic").keymaps(viewer, buf, {
+  require("keymaps.diagnostic").keymaps(buf, {
     priority = {
       { severity.ERROR, severity.WARN },
       { severity.INFO, severity.HINT },

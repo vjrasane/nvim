@@ -1,6 +1,6 @@
 local M = {}
 M._keys = {
-  { "<leader>cI", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
+  { "<leader>cL", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
   {
     "<leader>gd",
     function()
@@ -29,13 +29,13 @@ M._keys = {
     end,
     desc = "Goto T[y]pe Definition",
   },
-  { "K", "<cmd>Lspsaga hover_doc<cr>", desc = "Hover" },
+  { "K", vim.lsp.buf.hover, desc = "Hover" },
   -- { "K", vim.lsp.buf.hover, desc = "Hover" },
   -- { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
   -- { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
   -- { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
   {
-    "<leader>ca",
+    "<leader>a",
     vim.lsp.buf.code_action,
     desc = "Code Action",
     mode = { "n", "v" },
@@ -51,7 +51,7 @@ M._keys = {
   --   has = "codeAction",
   -- },
   {
-    "<leader>cA",
+    "<leader>A",
     function()
       vim.lsp.buf.code_action({
         context = {

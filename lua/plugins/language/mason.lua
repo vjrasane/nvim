@@ -6,7 +6,7 @@ return {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
   },
   --  cmd = "Mason",
-  keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
+  keys = { { "<leader>cM", "<cmd>Mason<cr>", desc = "Mason" } },
   --  build = ":MasonUpdate",
   config = function()
     require("mason").setup({

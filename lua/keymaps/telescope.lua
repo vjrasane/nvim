@@ -28,15 +28,16 @@ return {
   { "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Document diagnostics" },
   {
     "<leader>sg",
-    require("utils.telescope").telescope("live_grep", { cwd = vim.loop.cwd }),
+    function()
+      require("telescope.builtin").live_grep()
+    end,
     desc = "Grep",
   },
   {
     "<leader>sG",
-    require("utils.telescope").telescope(
-      "live_grep",
-      { cwd = require("config.root").get_cwd_root }
-    ),
+    function()
+      require("telescope.builtin").live_grep({ cwd = require("config.root").get_cwd_root() })
+    end,
     desc = "Grep (root)",
   },
   { "<leader>sD", "<cmd>Telescope diagnostics<cr>", desc = "Workspace diagnostics" },
