@@ -11,7 +11,7 @@ function M.keymaps(buf, opts)
     if not diagnostic then
       return vim.diagnostic.goto_prev()
     end
-    vim.diagnostic.goto_next({ severity = diagnostic.severity })
+    vim.diagnostic.goto_prev({ severity = diagnostic.severity })
   end
   local unused = "asd"
   local function goto_next(severity)
