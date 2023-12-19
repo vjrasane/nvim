@@ -2,6 +2,7 @@ return {
   {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
+    enabled = false,
     cmd = "Neotree",
     dependencies = {
       "MunifTanjim/nui.nvim",

@@ -1,7 +1,71 @@
 local Util = require("utils")
-
+local api = vim.api
+local ms = require("vim.lsp.protocol").Methods
+local a = require("plenary.async")
 local M = {}
+local util = require("vim.lsp.util")
 
+function M.code_action(options, callback)
+  require("utils.log").info("CALLED", options)
+  options = options or {}
+  if options.diagnostics or options.only then
+    options = { options = options }
+  end
+  local context = options.context or {}
+  if not context.triggerKind then
+    context.triggerKind = vim.lsp.protocol.CodeActionTriggerKind.Invoked
+  end
+  if not context.diagnostics then
+    local bufnr = api.nvim_get_current_buf()
+    context.diagnostics = vim.lsp.diagnostic.get_line_diagnostics(bufnr)
+  end
+  local mode = api.nvim_get_mode().mode
+  local bufnr = api.nvim_get_current_buf()
+  local win = api.nvim_get_current_win()
+  local clients = vim.lsp.get_clients({ bufnr = bufnr, method = ms.textDocument_codeAction })
+  local remaining = #clients
+  if remaining == 0 then
+    if next(vim.lsp.get_clients({ bufnr = bufnr })) then
+      vim.notify(vim.lsp._unsupported_method(ms.textDocument_codeAction), vim.log.levels.WARN)
+    end
+    return
+  end
+
+  local results = {}
+
+  local function on_result(err, result, ctx)
+    results[ctx.client_id] = { error = err, result = result, ctx = ctx }
+    remaining = remaining - 1
+    if remaining == 0 then
+      callback(results, options)
+    end
+  end
+
+  for _, client in ipairs(clients) do
+    local params
+    if options.range then
+      assert(type(options.range) == "table", "code_action range must be a table")
+      local start = assert(options.range.start, "range must have a `start` property")
+      local end_ = assert(options.range["end"], "range must have a `end` property")
+      params = util.make_given_range_params(start, end_, bufnr, client.offset_encoding)
+    elseif mode == "v" or mode == "V" then
+      local range = vim.lsp.buf.range_from_selection(bufnr, mode)
+      params =
+        util.make_given_range_params(range.start, range["end"], bufnr, client.offset_encoding)
+    else
+      params = util.make_range_params(win, client.offset_encoding)
+    end
+    params.context = context
+    client.request(ms.textDocument_codeAction, params, on_result, bufnr)
+  end
+end
+
+function M.get_code_actions(options)
+  a.run(function()
+    local result = a.wrap(M.code_action, 2)(options)
+    vim.notify(vim.inspect(result))
+  end, function() end)
+end
 function M.get_clients(opts)
   local ret = {}
   if vim.lsp.get_clients then
@@ -55,11 +119,14 @@ function M.disable(server, cond)
   local util = require("lspconfig.util")
   local def = M.get_config(server)
   ---@diagnostic disable-next-line: undefined-field
-  def.document_config.on_new_config = util.add_hook_before(def.document_config.on_new_config, function(config, root_dir)
-    if cond(root_dir, config) then
-      config.enabled = false
+  def.document_config.on_new_config = util.add_hook_before(
+    def.document_config.on_new_config,
+    function(config, root_dir)
+      if cond(root_dir, config) then
+        config.enabled = false
+      end
     end
-  end)
+  )
 end
 
 function M.formatter(opts)
@@ -88,7 +155,12 @@ function M.formatter(opts)
 end
 
 function M.format(opts)
-  opts = vim.tbl_deep_extend("force", {}, opts or {}, require("utils").opts("nvim-lspconfig").format or {})
+  opts = vim.tbl_deep_extend(
+    "force",
+    {},
+    opts or {},
+    require("utils").opts("nvim-lspconfig").format or {}
+  )
   local ok, conform = pcall(require, "conform")
   -- use conform for formatting with LSP when available,
   -- since it has better format diffing

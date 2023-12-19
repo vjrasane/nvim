@@ -32,11 +32,11 @@ return {
         NotifyINFOBorder = { fg = border, bg = border },
         NotifyDEBUGBorder = { fg = border, bg = border },
         NotifyTRACEBorder = { fg = border, bg = border },
-        NotifyERRORBody = { fg = background, bg = background },
-        NotifyWARNBody = { fg = background, bg = background },
-        NotifyINFOBody = { fg = background, bg = background },
-        NotifyDEBUGBody = { fg = background, bg = background },
-        NotifyTRACEBody = { fg = background, bg = background },
+        NotifyERRORBody = { bg = background },
+        NotifyWARNBody = { bg = background },
+        NotifyINFOBody = { bg = background },
+        NotifyDEBUGBody = { bg = background },
+        NotifyTRACEBody = { bg = background },
       }
 
       for hl, col in pairs(NotifyColor) do
