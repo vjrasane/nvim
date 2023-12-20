@@ -109,7 +109,7 @@ return {
   {
     "davidosomething/vim-colors-meh",
     lazy = false,
-    enabled = true,
+    enabled = false,
     priority = 1000,
     config = function()
       vim.cmd([[colorscheme meh]])
@@ -122,6 +122,18 @@ return {
     priority = 1000,
     config = function()
       vim.cmd([[colorscheme rasmus]])
+    end,
+  },
+  {
+    "ramojus/mellifluous.nvim",
+    lazy = false,
+    enabled = true,
+    priority = 1000,
+    config = function()
+      require("mellifluous").setup({
+        dim_inactive = true,
+      })
+      vim.cmd([[colorscheme mellifluous]])
     end,
   },
 }
