@@ -127,13 +127,65 @@ return {
   {
     "ramojus/mellifluous.nvim",
     lazy = false,
-    enabled = true,
+    enabled = false,
     priority = 1000,
     config = function()
       require("mellifluous").setup({
         dim_inactive = true,
       })
       vim.cmd([[colorscheme mellifluous]])
+    end,
+  },
+  {
+    "Shatur/neovim-ayu",
+    lazy = false,
+    enabled = false,
+    priority = 1000,
+    config = function()
+      require("ayu").setup({
+        mirage = false,
+      })
+      vim.cmd([[colorscheme ayu]])
+    end,
+  },
+  {
+    "kartikp10/noctis.nvim",
+    lazy = false,
+    enabled = false,
+    priority = 1000,
+    dependencies = {
+      "rktjmp/lush.nvim",
+    },
+    config = function()
+      vim.cmd([[colorscheme noctis]])
+    end,
+  },
+  {
+    "rose-pine/neovim",
+    name = "rose-pine",
+    lazy = false,
+    enabled = false,
+    priority = 1000,
+    config = function()
+      vim.cmd([[colorscheme rose-pine]])
+    end,
+  },
+  {
+    "miikanissi/modus-themes.nvim",
+    lazy = false,
+    enabled = true,
+    priority = 1000,
+    config = function()
+      vim.cmd([[colorscheme modus]])
+    end,
+  },
+  {
+    "cseelus/vim-colors-lucid",
+    lazy = false,
+    enabled = false,
+    priority = 1000,
+    config = function()
+      vim.cmd([[colorscheme lucid]])
     end,
   },
 }
