@@ -83,7 +83,7 @@ return {
   {
     "catppuccin/nvim",
     lazy = false,
-    -- enabled = false,
+    enabled = false,
     name = "macchiato",
     priority = 1000,
     config = function()
@@ -104,6 +104,24 @@ return {
         options = { dim_inactive = true },
       })
       vim.cmd([[colorscheme terafox]])
+    end,
+  },
+  {
+    "davidosomething/vim-colors-meh",
+    lazy = false,
+    enabled = true,
+    priority = 1000,
+    config = function()
+      vim.cmd([[colorscheme meh]])
+    end,
+  },
+  {
+    "kvrohit/rasmus.nvim",
+    lazy = false,
+    enabled = false,
+    priority = 1000,
+    config = function()
+      vim.cmd([[colorscheme rasmus]])
     end,
   },
 }

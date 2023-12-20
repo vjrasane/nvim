@@ -1,6 +1,7 @@
 return {
   "SmiteshP/nvim-navbuddy",
   event = "VeryLazy",
+  enabled = false,
   dependencies = {
     "SmiteshP/nvim-navic",
     "MunifTanjim/nui.nvim",

@@ -34,6 +34,13 @@ return {
     desc = "Grep",
   },
   {
+    "<leader>sj",
+    function()
+      require("telescope.builtin").jumplist()
+    end,
+    desc = "Jumplist",
+  },
+  {
     "<leader>sG",
     function()
       require("telescope.builtin").live_grep({ cwd = require("config.root").get_cwd_root() })

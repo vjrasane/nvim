@@ -57,42 +57,42 @@ return {
             cond = function () return package.loaded["dap"] and require("dap").status() ~= "" end,
             color = require("utils").ui.fg("Debug"),
           },
-            {
-              "diagnostics",
-              symbols = {
-                error = icons.diagnostics.Error,
-                warn = icons.diagnostics.Warn,
-                info = icons.diagnostics.Info,
-                hint = icons.diagnostics.Hint,
-              },
-            },
-            {
-              "diff",
-              symbols = {
-                added = icons.git.added,
-                modified = icons.git.modified,
-                removed = icons.git.removed,
-              },
-              source = function()
-                local gitsigns = vim.b.gitsigns_status_dict
-                if gitsigns then
-                  return {
-                    added = gitsigns.added,
-                    modified = gitsigns.changed,
-                    removed = gitsigns.removed,
-                  }
-                end
-              end,
-            },
+            -- {
+            --   "diagnostics",
+            --   symbols = {
+            --     error = icons.diagnostics.Error,
+            --     warn = icons.diagnostics.Warn,
+            --     info = icons.diagnostics.Info,
+            --     hint = icons.diagnostics.Hint,
+            --   },
+            -- },
+            -- {
+            --   "diff",
+            --   symbols = {
+            --     added = icons.git.added,
+            --     modified = icons.git.modified,
+            --     removed = icons.git.removed,
+            --   },
+            --   source = function()
+            --     local gitsigns = vim.b.gitsigns_status_dict
+            --     if gitsigns then
+            --       return {
+            --         added = gitsigns.added,
+            --         modified = gitsigns.changed,
+            --         removed = gitsigns.removed,
+            --       }
+            --     end
+            --   end,
+            -- },
           },
           lualine_y = {
-            { "progress", separator = " ", padding = { left = 1, right = 0 } },
+            -- { "progress", separator = " ", padding = { left = 1, right = 0 } },
             { "location", padding = { left = 0, right = 1 } },
-            {
-              require("lazy.status").updates,
-              cond = require("lazy.status").has_updates,
-              color = require("utils").ui.fg("Special"),
-            },
+            -- {
+            --   require("lazy.status").updates,
+            --   cond = require("lazy.status").has_updates,
+            --   color = require("utils").ui.fg("Special"),
+            -- },
           },
           lualine_z = {
             function()

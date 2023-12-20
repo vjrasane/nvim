@@ -2,8 +2,9 @@ return {
   {
     "rcarriga/nvim-notify",
     dependencies = {
-      { "catppuccin/nvim" },
+      -- { "catppuccin/nvim" },
     },
+    enabled = false,
     opts = {
       stages = "fade",
       render = "compact",
@@ -20,23 +21,23 @@ return {
     },
     config = function(_, opts)
       require("notify").setup(opts)
-      local colors = require("catppuccin.palettes").get_palette()
-      if not colors then
-        return
-      end
-      local border = colors.mantle
-      local background = colors.mantle
+      -- local colors = require("catppuccin.palettes").get_palette()
+      -- if not colors then
+      --   return
+      -- end
+      -- local border = colors.mantle
+      -- local background = colors.mantle
       local NotifyColor = {
-        NotifyERRORBorder = { fg = border, bg = border },
-        NotifyWARNBorder = { fg = border, bg = border },
-        NotifyINFOBorder = { fg = border, bg = border },
-        NotifyDEBUGBorder = { fg = border, bg = border },
-        NotifyTRACEBorder = { fg = border, bg = border },
-        NotifyERRORBody = { bg = background },
-        NotifyWARNBody = { bg = background },
-        NotifyINFOBody = { bg = background },
-        NotifyDEBUGBody = { bg = background },
-        NotifyTRACEBody = { bg = background },
+        -- NotifyERRORBorder = { fg = border, bg = border },
+        -- NotifyWARNBorder = { fg = border, bg = border },
+        -- NotifyINFOBorder = { fg = border, bg = border },
+        -- NotifyDEBUGBorder = { fg = border, bg = border },
+        -- NotifyTRACEBorder = { fg = border, bg = border },
+        -- NotifyERRORBody = { bg = background },
+        -- NotifyWARNBody = { bg = background },
+        -- NotifyINFOBody = { bg = background },
+        -- NotifyDEBUGBody = { bg = background },
+        -- NotifyTRACEBody = { bg = background },
       }
 
       for hl, col in pairs(NotifyColor) do
