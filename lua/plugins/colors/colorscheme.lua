@@ -173,7 +173,7 @@ return {
   {
     "miikanissi/modus-themes.nvim",
     lazy = false,
-    enabled = true,
+    enabled = false,
     priority = 1000,
     config = function()
       vim.cmd([[colorscheme modus]])
@@ -186,6 +186,62 @@ return {
     priority = 1000,
     config = function()
       vim.cmd([[colorscheme lucid]])
+    end,
+  },
+  {
+    "Alexis12119/nightly.nvim",
+    lazy = false,
+    enabled = false,
+    priority = 1000,
+    config = function()
+      require("nightly").setup({
+        transparent = true,
+        styles = {
+          comments = { italic = true },
+          functions = { italic = false },
+          variables = { italic = false },
+          keywords = { italic = false },
+        },
+        highlights = {},
+      })
+      vim.cmd([[colorscheme nightly]])
+    end,
+  },
+  {
+    "rebelot/kanagawa.nvim",
+    lazy = false,
+    enabled = true,
+    priority = 1000,
+    config = function()
+      require("kanagawa").setup({
+        transparent = false,
+        dimInactive = false,
+      })
+      vim.cmd([[colorscheme kanagawa-dragon]])
+    end,
+  },
+  {
+    "projekt0n/github-nvim-theme",
+    enabled = false,
+    lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    priority = 1000, -- make sure to load this before all the other start plugins
+    config = function()
+      require("github-theme").setup({})
+
+      vim.cmd("colorscheme github_dark_default")
+    end,
+  },
+  {
+    "ribru17/bamboo.nvim",
+    enabled = false,
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("bamboo").setup({
+        transparent = true,
+        dim_inactive = true,
+      })
+      require("bamboo").load()
     end,
   },
 }
