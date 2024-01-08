@@ -4,11 +4,9 @@ return {
     version = false,
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      { "folke/neodev.nvim", opts = {} },
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
-      { "folke/neodev.nvim", opts = {} },
     },
     opts = {
       diagnostics = {
@@ -128,7 +126,8 @@ return {
         require("lspconfig")[server].setup(server_opts)
       end
 
-      local all_mslp_servers = vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
+      local all_mslp_servers =
+        vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
 
       local ensure_installed = {}
       for server, server_opts in pairs(servers) do
