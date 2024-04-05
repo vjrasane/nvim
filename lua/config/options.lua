@@ -30,7 +30,8 @@ opt.shiftwidth = 2 -- Size of an indent
 opt.shortmess:append({ W = true, I = true, c = true, C = true })
 opt.showmode = false -- Dont show mode since we have a statusline
 opt.sidescrolloff = 8 -- Columns of context
-opt.signcolumn = "no" -- Always show the signcolumn, otherwise it would shift the text each time
+-- opt.signcolumn = "no" -- Always show the signcolumn, otherwise it would shift the text each time
+opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
 opt.smartcase = true -- Don't ignore case with capitals
 opt.smartindent = true -- Insert indents automatically
 opt.spelllang = { "en" }
@@ -64,20 +65,6 @@ end
 -- Folding
 vim.opt.foldlevel = 99
 vim.opt.foldtext = "v:lua.require'utils'.ui.foldtext()"
-
-if vim.fn.has("nvim-0.9.0") == 1 then
-  vim.opt.statuscolumn = [[%!v:lua.require'utils'.ui.statuscolumn()]]
-end
-
--- HACK: causes freezes on <= 0.9, so only enable on >= 0.10 for now
-if vim.fn.has("nvim-0.10") == 1 then
-  vim.opt.foldmethod = "expr"
-  vim.opt.foldexpr = "v:lua.require'utils'.ui.foldexpr()"
-else
-  vim.opt.foldmethod = "indent"
-end
-
-vim.o.formatexpr = "v:lua.require'utils'.format.formatexpr()"
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
