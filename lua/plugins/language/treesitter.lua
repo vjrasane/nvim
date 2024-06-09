@@ -92,7 +92,7 @@ return {
       },
     },
     autotag = {
-      enable = true,
+      -- enable = true,
     },
   },
   config = function(_, opts)

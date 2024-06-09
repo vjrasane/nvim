@@ -4,6 +4,7 @@ return {
     "lukas-reineke/indent-blankline.nvim",
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help ibl`
+    enabled = false,
     event = { "BufReadPre", "BufNewFile" },
     config = true,
     main = "ibl",

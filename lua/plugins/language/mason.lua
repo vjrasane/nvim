@@ -21,7 +21,7 @@ return {
       "pyright",
       "js-debug-adapter",
       "prettier", -- prettier formatter
-      "stylua",   -- lua formatter
+      "stylua", -- lua formatter
       "eslint_d", -- js linter
     },
   },
@@ -39,6 +39,7 @@ return {
     require("mason-lspconfig").setup({
       -- auto-install configured servers (with lspconfig)
       automatic_installation = true, -- not the same as ensure_installed
+      ensure_installed = opts.ensure_installed,
     })
 
     require("mason-tool-installer").setup({

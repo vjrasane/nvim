@@ -2,6 +2,7 @@ return {
   {
     "mfussenegger/nvim-dap",
     cmd = { "DapToggleBreakpoint" },
+    enabled = false,
     keys = {
       { "<leader>db", "<cmd>DapToggleBreakpoint<cr>", desc = "Toggle Breakpoint", noremap = true },
     },
@@ -34,6 +35,7 @@ return {
 
   {
     "theHamsta/nvim-dap-virtual-text",
+    enabled = false,
     dependencies = {
       "mfussenegger/nvim-dap",
       { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
