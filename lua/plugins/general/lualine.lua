@@ -23,7 +23,8 @@ return {
         },
         sections = {
           lualine_a = { "mode" },
-          lualine_b = { "buffers" },
+          lualine_b = { "filename" },
+          lualine_c = {},
           -- lualine_b = { "branch" },
           -- lualine_c = {
           --   require("utils.lualine").root_dir(),

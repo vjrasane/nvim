@@ -1,5 +1,6 @@
 return {
   "nvimdev/dashboard-nvim",
+  enabled = false,
   priority = 100,
   event = "VimEnter",
   opts = function()
@@ -29,7 +30,13 @@ return {
         },
         footer = { "", "[ @vjrasane ]" },
         shortcut = {
-          { icon = "\u{eb29} ", desc = "Packages", group = "DashboardShortCutIcon", key = "l", action = "Lazy" },
+          {
+            icon = "\u{eb29} ",
+            desc = "Packages",
+            group = "DashboardShortCutIcon",
+            key = "l",
+            action = "Lazy",
+          },
           {
             icon = "\u{f12e2} ",
             desc = "Previous",
