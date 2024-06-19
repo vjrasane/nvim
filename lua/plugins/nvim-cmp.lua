@@ -17,7 +17,7 @@ return {
   opts = function()
     vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
     local cmp = require("cmp")
-    local luasnip = require("lua.plugins.luasnip")
+    local luasnip = require("luasnip")
     local defaults = require("cmp.config.default")()
     return {
       completion = {
@@ -25,7 +25,7 @@ return {
       },
       snippet = {
         expand = function(args)
-          require("lua.plugins.luasnip").lsp_expand(args.body)
+          require("luasnip").lsp_expand(args.body)
         end,
       },
       mapping = cmp.mapping.preset.insert({
@@ -120,6 +120,6 @@ return {
       source.group_index = source.group_index or 1
     end
     require("cmp").setup(opts)
-    require("lua.plugins.tabout")
+    require("tabout")
   end,
 }

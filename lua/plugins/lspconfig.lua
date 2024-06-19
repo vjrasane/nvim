@@ -144,6 +144,16 @@ return {
       require("mason-lspconfig").setup({ ensure_installed = ensure_installed, handlers = { setup } })
 
       require("lspconfig.ui.windows").default_options.border = "single"
+      local severity = vim.diagnostic.severity
+
+      require("utils.lsp").on_attach(function(_, buf)
+        require("keymaps.diagnostic").keymaps(buf, {
+          priority = {
+            { severity.ERROR, severity.WARN },
+            { severity.INFO, severity.HINT },
+          },
+        })
+      end)
     end,
   },
   {
