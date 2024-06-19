@@ -7,10 +7,7 @@ end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 require("lazy").setup({
-  { import = "plugins.general" },
-  { import = "plugins.language" },
-  { import = "plugins.colors" },
-  { import = "plugins.git" },
+  { import = "plugins" },
 }, {
   dev = {
     -- directory where you store your local plugin projects

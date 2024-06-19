@@ -1,8 +1,6 @@
 return {
   "ahmedkhalf/project.nvim",
-  --   event = { "BufReadPre", "BufNewFile" },
   event = "VeryLazy",
-  --   event = "VimEnter",
   config = function()
     require("project_nvim").setup({
       detection_methods = { "pattern" },
@@ -30,7 +28,6 @@ return {
       "<leader>sp",
       function()
         require("telescope").extensions.projects.projects({
-
           attach_mappings = function(_, map)
             -- local open_project = function(prompt_bufnr)
             --   local selected_entry = require("telescope.actions.state").get_selected_entry(prompt_bufnr)

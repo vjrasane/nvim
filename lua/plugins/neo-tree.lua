@@ -2,7 +2,6 @@ return {
   {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
-    -- enabled = false,
     cmd = "Neotree",
     dependencies = {
       "MunifTanjim/nui.nvim",
@@ -43,7 +42,7 @@ return {
       --   "<leader>be",
       --   function()
       --     require("neo-tree.command").execute({ source = "buffers", toggle = true })
-      --   end,
+      --   end,neotre
       --   desc = "Buffer explorer",
       -- },
     },

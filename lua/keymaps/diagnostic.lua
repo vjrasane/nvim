@@ -13,7 +13,6 @@ function M.keymaps(buf, opts)
     end
     vim.diagnostic.goto_prev({ severity = diagnostic.severity })
   end
-  local unused = "asd"
   local function goto_next(severity)
     if severity then
       return vim.diagnostic.goto_next({ severity = severity })

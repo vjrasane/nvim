@@ -7,21 +7,20 @@ end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 require("config.options")
-require("config.clipboard")
 require("config.lazy")
 -- must be after lazy
 require("config.keymaps")
 require("config.autocmds")
 
-local severity = vim.diagnostic.severity
+-- local severity = vim.diagnostic.severity
 
-require("utils.lsp").on_attach(function(_, buf)
-  require("keymaps.diagnostic").keymaps(buf, {
-    priority = {
-      { severity.ERROR, severity.WARN },
-      { severity.INFO, severity.HINT },
-    },
-  })
-end)
+-- require("utils.lsp").on_attach(function(_, buf)
+--   require("keymaps.diagnostic").keymaps(buf, {
+--     priority = {
+--       { severity.ERROR, severity.WARN },
+--       { severity.INFO, severity.HINT },
+--     },
+--   })
+-- end)
 
-require("global")
+-- require("global")

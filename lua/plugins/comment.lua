@@ -9,21 +9,6 @@ return {
     },
   },
   {
-    "echasnovski/mini.comment",
-    event = { "BufReadPre", "BufNewFile" },
-    enabled = false,
-    dependencies = {
-      "JoosepAlviste/nvim-ts-context-commentstring",
-    },
-    opts = {
-      options = {
-        custom_commentstring = function()
-          return require("ts_context_commentstring.internal").calculate_commentstring() or vim.bo.commentstring
-        end,
-      },
-    },
-  },
-  {
     "numToStr/Comment.nvim",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {

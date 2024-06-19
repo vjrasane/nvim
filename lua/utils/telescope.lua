@@ -22,7 +22,10 @@ function M.telescope(builtin, opts)
         map("i", "<A-c>", function()
           local action_state = require("telescope.actions.state")
           local line = action_state.get_current_line()
-          M.telescope(builtin, vim.tbl_deep_extend("force", {}, opts or {}, { cwd = false, default_text = line }))()
+          M.telescope(
+            builtin,
+            vim.tbl_deep_extend("force", {}, opts or {}, { cwd = false, default_text = line })
+          )()
         end)
         return true
       end
@@ -70,7 +73,7 @@ M.find_files_in = function(cwd)
 end
 
 M.file_browser_in = function(cwd)
-  require("telescope").extensions.file_browser.file_browser({
+  require("lua.plugins.telescope").extensions.file_browser.file_browser({
     cwd = cwd,
     -- path = "%:p:h=%:p:h",
     find_command = { "rg", "--files", "--hidden", "-g", "!.git" },

@@ -6,6 +6,7 @@ return {
     keys = {
       { "<leader>db", "<cmd>DapToggleBreakpoint<cr>", desc = "Toggle Breakpoint", noremap = true },
     },
+    enabled = false,
   },
   {
     "rcarriga/nvim-dap-ui",
@@ -31,6 +32,7 @@ return {
         noremap = true,
       },
     },
+    enabled = false,
   },
 
   {
@@ -45,5 +47,6 @@ return {
         require("nvim-dap-virtual-text").setup()
       end)
     end,
+    enabled = false,
   },
 }

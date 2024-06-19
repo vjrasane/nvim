@@ -91,9 +91,9 @@ return {
         goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer" },
       },
     },
-    autotag = {
-      -- enable = true,
-    },
+    -- autotag = {
+    --   enable = true,
+    -- },
   },
   config = function(_, opts)
     if type(opts.ensure_installed) == "table" then
